@@ -10,6 +10,7 @@ public class PlayerRunState : StateMachineBehaviour
     private Vector2 _runColOffset = new Vector2(0, -1.1f);
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // RunState Collider 수정
         _collider = animator.GetComponent<CapsuleCollider2D>();
         _collider.offset = _runColOffset;
         _collider.direction = CapsuleDirection2D.Vertical;

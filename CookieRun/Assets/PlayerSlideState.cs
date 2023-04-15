@@ -10,6 +10,7 @@ public class PlayerSlideState : StateMachineBehaviour
     private Vector2 _slideColOffset = new Vector2(0, -1.3f);
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // SlideState Collider 수정
         _collider = animator.GetComponent<CapsuleCollider2D>();
         _collider.offset = _slideColOffset;
         _collider.direction = CapsuleDirection2D.Horizontal;

@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Animation Event 호출 함수
     public void Run()
     {
         _animator.SetTrigger(PlayerAnimID.IS_RUN);
