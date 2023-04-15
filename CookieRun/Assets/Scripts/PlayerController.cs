@@ -22,4 +22,9 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool(PlayerAnimID.IS_JUMPING, false);
         }
     }
+
+    public void Run()
+    {
+        _animator.SetTrigger(PlayerAnimID.IS_RUN);
+    }
 }
