@@ -2184,6 +2184,7 @@ MonoBehaviour:
   jumpForce: 25
   gravityModifier: 10
   isInvincible: 0
+  jumping: 0
 --- !u!1001 &450878688243876166
 PrefabInstance:
   m_ObjectHideFlags: 0
