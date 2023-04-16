@@ -12,4 +12,6 @@ public class PlayerData : MonoBehaviour
 
     // test hp = 50 -> 100으로 변경 예정.
     public static float HP = 50f;
+
+    public bool jumping = false;
 }

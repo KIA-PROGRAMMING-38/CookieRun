@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RepeatBackground : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class RepeatBackground : MonoBehaviour
     private void Start()
     {
         startPos = transform.position;
-        repeatWidth = GetComponent<BoxCollider2D>().size.x;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
