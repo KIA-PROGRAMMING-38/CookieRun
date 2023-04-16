@@ -9,10 +9,15 @@ public class ItemCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        // Player에게 닿으면 점수 획득, 아이템은 비활성화
         if (col.CompareTag("Player"))
         {
             GameManager.UpdateScore(jellyScore);
-            Debug.Log(GameManager.score);
+            gameObject.SetActive(false);
+        }
+        
+        if (col.CompareTag("LeftBound"))
+        {
             gameObject.SetActive(false);
         }
     }
