@@ -76,20 +76,4 @@ public class PlayerController : MonoBehaviour
 
 
     }
-
-    private void OnDamaged()
-    {
-        // 무적상태 진입
-        _playerData.isInvincible = true;
-        _spriteRenderer.color = _invincibleColor;
-        
-        // test 1초뒤 무적상태 해제. 3초로 변경 예정
-        Invoke("OffDamaged", 1);
-    }
-
-    private void OffDamaged()
-    {
-        _spriteRenderer.color = _originalColor;
-        _playerData.isInvincible = false;
-    }
 }
