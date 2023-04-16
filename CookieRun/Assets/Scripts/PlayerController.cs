@@ -11,13 +11,22 @@ public class PlayerController : MonoBehaviour
     private float _maxHp = 100f;
     private SpriteRenderer _spriteRenderer;
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
-    Color _originalColor = new Color(1,1,1,1);
+    private Color _originalColor = new Color(1,1,1,1);
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _playerData = GetComponent<PlayerData>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         Physics2D.gravity *= _playerData.gravityModifier;
+    }
+
+    private void Update()
+    {
+        // 어느 상태던지 hp가 0이면 Die상태가 된다.
+        if (PlayerData.HP == 0)
+        {
+            _animator.Play("Die");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -33,8 +42,11 @@ public class PlayerController : MonoBehaviour
         // 무적상태이면 Hurt로 들어가면 안된다.
         if (col.gameObject.CompareTag("Enemy") && !_playerData.isInvincible)
         {
-            OnDamaged();
-            _animator.SetTrigger(PlayerAnimID.IS_HURT);
+            if (!GameManager.gameOver)
+            {
+                _animator.SetTrigger(PlayerAnimID.IS_HURT);
+                OnDamaged();    
+            }
         }
     }
 
@@ -55,9 +67,9 @@ public class PlayerController : MonoBehaviour
         // 무적상태 진입
         _playerData.isInvincible = true;
         _spriteRenderer.color = _invincibleColor;
-     
-        // 3초 뒤 무적상태 해제
-        Invoke("OffDamaged", 3);
+        
+        // test 1초뒤 무적상태 해제. 3초로 변경 예정
+        Invoke("OffDamaged", 1);
     }
 
     private void OffDamaged()

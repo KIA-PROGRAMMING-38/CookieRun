@@ -10,5 +10,6 @@ public class PlayerData : MonoBehaviour
     // 무적 상태 체크
     public bool isInvincible = false;
 
-    public static float HP = 100f;
+    // test hp = 50 -> 100으로 변경 예정.
+    public static float HP = 50f;
 }
