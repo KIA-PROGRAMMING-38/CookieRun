@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
+    private WaitForSeconds _escapeInvincibleTime = new WaitForSeconds(3f);
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
             if (!GameManager.gameOver)
             {
                 _animator.SetTrigger(PlayerAnimID.IS_HURT);
-                OnDamaged();    
+                StartCoroutine(Invincible());
             }
         }
     }
@@ -60,6 +61,20 @@ public class PlayerController : MonoBehaviour
     public void ChangeHp(float amount)
     {
         PlayerData.HP = Mathf.Clamp(PlayerData.HP + amount, 0, _maxHp);
+    }
+    
+    IEnumerator Invincible()
+    {
+        // 무적상태 진입
+        _playerData.isInvincible = true;
+        _spriteRenderer.color = _invincibleColor;
+        
+        // 3초 뒤 무적상태 해제
+        yield return _escapeInvincibleTime;
+        _spriteRenderer.color = _originalColor;
+        _playerData.isInvincible = false;
+
+
     }
 
     private void OnDamaged()
