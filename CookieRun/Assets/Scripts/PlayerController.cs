@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         // 무적상태이면 Hurt로 들어가면 안된다.
         if (col.gameObject.CompareTag("Enemy") && !_playerData.isInvincible)
         {
-            StartCoroutine(Invincible());
+            OnDamaged();
             _animator.SetTrigger(PlayerAnimID.IS_HURT);
         }
     }
@@ -50,17 +50,19 @@ public class PlayerController : MonoBehaviour
         PlayerData.HP = Mathf.Clamp(PlayerData.HP + amount, 0, _maxHp);
     }
 
-    IEnumerator Invincible()
+    private void OnDamaged()
     {
         // 무적상태 진입
         _playerData.isInvincible = true;
         _spriteRenderer.color = _invincibleColor;
-        
+     
         // 3초 뒤 무적상태 해제
-        yield return new WaitForSeconds(3f);
+        Invoke("OffDamaged", 3);
+    }
+
+    private void OffDamaged()
+    {
         _spriteRenderer.color = _originalColor;
         _playerData.isInvincible = false;
-
-
     }
 }
