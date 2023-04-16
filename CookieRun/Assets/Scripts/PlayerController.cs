@@ -23,6 +23,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Enemy"))
+        {
+            _animator.SetTrigger(PlayerAnimID.IS_HURT);
+            PlayerData.HP -= 10f;
+            Debug.Log(PlayerData.HP);
+        }
+    }
+
     // Animation Event 호출 함수
     public void Run()
     {
