@@ -21,6 +21,7 @@ public class PlayerHurtState : StateMachineBehaviour
             _playerData.jumping = false;
             animator.SetBool(PlayerAnimID.IS_JUMPING, false);
         }
+        
         Debug.Log(PlayerData.HP);
     }
 }
