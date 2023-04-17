@@ -7,7 +7,7 @@ public class MagnetEffect : MonoBehaviour
 {
     public float Duration = 3f;
     // 끌어당기는 속도
-    public float pullingSpeed;
+    public float pullingSpeed = 15f;
     
     private float _startTime;
 
@@ -38,11 +38,9 @@ public class MagnetEffect : MonoBehaviour
             // 컴포넌트 비활성화
             enabled = false;
         }
-        
-        _playerPosition = _playerTransform.position;
-        
-        _targetPosition = new Vector3(other.transform.position.x, _playerPosition.y - 1f, other.transform.position.z);
-        
-        other.transform.position = Vector3.MoveTowards(other.transform.position, _targetPosition, Time.deltaTime * 10f);
+
+        _targetPosition = new Vector3(_playerTransform.position.x, _playerTransform.position.y -1f, _playerTransform.position.z);
+
+        other.transform.position = Vector3.MoveTowards(other.transform.position, _targetPosition, Time.deltaTime * pullingSpeed);
     }
 }
