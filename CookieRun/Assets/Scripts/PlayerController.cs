@@ -13,11 +13,17 @@ public class PlayerController : MonoBehaviour
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
     private WaitForSeconds _escapeInvincibleTime = new WaitForSeconds(3f);
+
+    // 자석에 닿았을시 켜지는 센서
+    public GameObject magnetSensor;
+    
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _playerData = GetComponent<PlayerData>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // 중력 적용
         Physics2D.gravity *= _playerData.gravityModifier;
     }
 
@@ -41,7 +47,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         // 무적상태이면 Hurt로 들어가면 안된다.
-        if (col.gameObject.CompareTag("Enemy") && !_playerData.isInvincible)
+        if (col.CompareTag("Enemy") && !_playerData.isInvincible)
         {
             if (!GameManager.gameOver)
             {
@@ -51,6 +57,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // 자석 센서 활성화. 자석이 플레이어에 닿았을 시 호출된다.
+    public void ActivateManeticEffect()
+    {
+        magnetSensor.SetActive(true);
+    }
+
     // Animation Event 호출 함수
     public void Run()
     {
@@ -58,7 +70,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Hp값 변화 메소드
-    public void ChangeHp(float amount)
+    public void ChangesHpByAmount(float amount)
     {
         PlayerData.HP = Mathf.Clamp(PlayerData.HP + amount, 0, _maxHp);
     }

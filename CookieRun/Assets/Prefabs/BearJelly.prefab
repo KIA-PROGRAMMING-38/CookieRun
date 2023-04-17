@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8606324198173932958}
   - component: {fileID: 8606324198173932957}
   - component: {fileID: 8606324198173932959}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BearJelly
-  m_TagString: Untagged
+  m_TagString: Jelly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
