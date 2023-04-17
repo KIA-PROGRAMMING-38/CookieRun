@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
-    private WaitForSeconds _escapeInvincibleTime = new WaitForSeconds(3f);
+    private WaitForSeconds _escapeInvincibleTime;
 
     // 자석에 닿았을시 켜지는 센서
     public GameObject magnetSensor;
@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
         // 중력 적용
         Physics2D.gravity *= _playerData.gravityModifier;
+
+        _escapeInvincibleTime = new WaitForSeconds(3f);
     }
 
     private void Update()
@@ -84,6 +86,12 @@ public class PlayerController : MonoBehaviour
         // 3초 뒤 무적상태 해제
         yield return _escapeInvincibleTime;
         _spriteRenderer.color = _originalColor;
+        Debug.Log("무적상태 해제");
         _playerData.isInvincible = false;
+    }
+
+    public void ActiveInvincibleCoroutine()
+    {
+        StartCoroutine(Invincible());
     }
 }
