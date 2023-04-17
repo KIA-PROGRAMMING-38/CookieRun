@@ -6,8 +6,23 @@ using UnityEngine;
 public class MagnetEffect : MonoBehaviour
 {
     public float Duration = 3f;
-
+    // 끌어당기는 속도
+    public float pullingSpeed;
+    
     private float _startTime;
+
+    private Transform _playerTransform;
+    private Vector3 _playerPosition;
+
+    private Vector3 _lookDirection;
+    private Vector3 _targetPosition;
+
+    
+
+    private void Start()
+    {
+        _playerTransform = transform.parent;
+    }
 
     private void OnEnable()
     {
@@ -23,8 +38,11 @@ public class MagnetEffect : MonoBehaviour
             // 컴포넌트 비활성화
             enabled = false;
         }
-
-        // 끌어오게 한다.
-        Debug.Log("젤리 끌어오는 중");
+        
+        _playerPosition = _playerTransform.position;
+        
+        _targetPosition = new Vector3(other.transform.position.x, _playerPosition.y - 1f, other.transform.position.z);
+        
+        other.transform.position = Vector3.MoveTowards(other.transform.position, _targetPosition, Time.deltaTime * 10f);
     }
 }

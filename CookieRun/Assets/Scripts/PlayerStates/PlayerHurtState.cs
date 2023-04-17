@@ -13,7 +13,7 @@ public class PlayerHurtState : StateMachineBehaviour
         _playerController = animator.GetComponent<PlayerController>();
         _playerData = animator.GetComponent<PlayerData>();
         // PlayerHP 깍임
-        _playerController.ChangeHp(_attackValue);
+        _playerController.ChangesHpByAmount(_attackValue);
         
         // jump중에 Enemy랑 닿았다면 isJumping을 false해준다.
         if (_playerData.jumping == true)

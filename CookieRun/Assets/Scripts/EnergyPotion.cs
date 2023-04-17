@@ -16,7 +16,7 @@ public class EnergyPotion : MonoBehaviour
             _playerController = col.GetComponent<PlayerController>();
             
             // hp 회복
-            _playerController.ChangeHp(hpRecoveryValue);
+            _playerController.ChangesHpByAmount(hpRecoveryValue);
             Debug.Log(PlayerData.HP);
             
             gameObject.SetActive(false);

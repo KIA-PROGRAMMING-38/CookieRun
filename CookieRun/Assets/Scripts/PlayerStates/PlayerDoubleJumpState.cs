@@ -15,16 +15,4 @@ public class PlayerDoubleJumpState : StateMachineBehaviour
         // DoubleJump
         _rigidbody.velocity = _up * _playerData.jumpForce;
     }
-
- 
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        
-    }
-
- 
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        
-    }
 }

@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Hp값 변화 메소드
-    public void ChangeHp(float amount)
+    public void ChangesHpByAmount(float amount)
     {
         PlayerData.HP = Mathf.Clamp(PlayerData.HP + amount, 0, _maxHp);
     }
