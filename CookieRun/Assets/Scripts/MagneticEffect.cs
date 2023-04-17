@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagnetEffect : MonoBehaviour
+public class MagneticEffect : MonoBehaviour
 {
     public float Duration = 3f;
     // 끌어당기는 속도
@@ -12,13 +12,9 @@ public class MagnetEffect : MonoBehaviour
     private float _startTime;
 
     private Transform _playerTransform;
-    private Vector3 _playerPosition;
-
-    private Vector3 _lookDirection;
-    private Vector3 _targetPosition;
-
     
-
+    private Vector3 _targetPosition;
+    
     private void Start()
     {
         _playerTransform = transform.parent;

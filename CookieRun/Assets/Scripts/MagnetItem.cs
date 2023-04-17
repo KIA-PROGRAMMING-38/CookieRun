@@ -13,7 +13,7 @@ public class MagnetItem : MonoBehaviour
 
         if (_playerController != null)
         {
-            _playerController.ActivateManeticEffect();
+            _playerController.ActivateMagneticEffect();
             gameObject.SetActive(false);
         }
     }

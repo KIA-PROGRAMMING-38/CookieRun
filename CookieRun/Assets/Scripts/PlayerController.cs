@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // 자석 센서 활성화. 자석이 플레이어에 닿았을 시 호출된다.
-    public void ActivateManeticEffect()
+    public void ActivateMagneticEffect()
     {
         magnetSensor.SetActive(true);
     }
