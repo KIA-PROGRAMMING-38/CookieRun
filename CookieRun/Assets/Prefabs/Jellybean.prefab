@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8332548291801131793}
   - component: {fileID: 8332548291801131794}
   - component: {fileID: 8332548291801131795}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Jellybean
-  m_TagString: Untagged
+  m_TagString: Jelly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

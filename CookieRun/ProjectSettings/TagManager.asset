@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - LeftBound
   - Magnet
+  - Jelly
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - UI
   - Player
   - BaseMap
-  - 
-  - 
+  - Jelly
+  - MagnetSensor
   - 
   - 
   - 

@@ -55,11 +55,12 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Invincible());
             }
         }
+    }
 
-        if (col.CompareTag("Magnet"))
-        {
-            magnetSensor.SetActive(true);   
-        }
+    // 자석 센서 활성화. 자석이 플레이어에 닿았을 시 호출된다.
+    public void ActivateManeticEffect()
+    {
+        magnetSensor.SetActive(true);
     }
 
     // Animation Event 호출 함수
