@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,4 +15,9 @@ public class PlayerData : MonoBehaviour
     public static float HP = 50f;
 
     public bool jumping = false;
+
+    private void Start()
+    {
+        Debug.Log(HP);
+    }
 }
