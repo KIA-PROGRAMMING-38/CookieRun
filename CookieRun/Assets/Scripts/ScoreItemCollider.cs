@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemCollider : MonoBehaviour
+public class ScoreItemCollider : MonoBehaviour
 {
     public float jellyScore;
 
@@ -13,6 +13,7 @@ public class ItemCollider : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             GameManager.UpdateScore(jellyScore);
+
             gameObject.SetActive(false);
         }
         

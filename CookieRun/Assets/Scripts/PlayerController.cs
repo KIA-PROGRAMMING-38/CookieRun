@@ -73,7 +73,5 @@ public class PlayerController : MonoBehaviour
         yield return _escapeInvincibleTime;
         _spriteRenderer.color = _originalColor;
         _playerData.isInvincible = false;
-
-
     }
 }
