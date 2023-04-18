@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
     // 자석에 닿았을시 켜지는 센서
     public GameObject magnetSensor;
     
+    public ParticleSystem dashParticle;
+    public GameObject dashSprite;
+    public GameObject explosionAnimation;
+    
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -68,6 +72,13 @@ public class PlayerController : MonoBehaviour
         magnetSensor.SetActive(true);
     }
 
+    // LightSpeed상태일때 켜질 Effect
+    public void ActivateDashEffect(bool active)
+    {
+        dashParticle.gameObject.SetActive(active);
+        dashSprite.gameObject.SetActive(active);
+    }
+
     // Animation Event 호출 함수
     public void Run()
     {
@@ -99,12 +110,26 @@ public class PlayerController : MonoBehaviour
 
         // 3초 뒤 무적상태 해제
         yield return _escapeInvincibleTime;
+        
+        // Hurt에서 바뀌었던 색을 원래대로 되돌린다.
         _spriteRenderer.color = _originalColor;
+        
+        // LightSpeed 상태에서 빨라졌던 플레이어의 애니메이션을 되돌린다.
         _playerAnimController.SetAnimSpeed(_playerData.nomalSpeed);
         
+        // GameSpeed를 원래대로 되돌린다.
+        GameManager.SetDefaultGameSpeed();
+        
+        // dashEffect 비활성화
+        ActivateDashEffect(false);
+
+        _playerData.isLightSpeed = false;
+
         Debug.Log("무적상태 해제");
         _playerData.isInvincible = false;
     }
+    
+    
 
     public void ActiveInvincibleCoroutine()
     {
