@@ -8,7 +8,7 @@ public class LightSpeedItem : MonoBehaviour
     public float lightSpeed = 2f;
     private PlayerController _playerController;
     private PlayerData _playerData;
-    private IEnumerator _invincible;
+    private IEnumerator _lightSpeedCoroutine;
     private PlayerAnimController _playerAnimController;
 
     // Player랑만 충돌검사를 하게 레이어 구성을 했다.
@@ -17,10 +17,12 @@ public class LightSpeedItem : MonoBehaviour
         _playerData = col.GetComponent<PlayerData>();
         _playerController = col.GetComponent<PlayerController>();
         _playerAnimController = col.GetComponent<PlayerAnimController>();
+        _lightSpeedCoroutine = _playerController.LightSpeedInvincible();
+        
         
         if (_playerController != null)
         {
-            _playerController.ActiveInvincibleCoroutine();
+            _playerController.SetActiveCoroutine(_lightSpeedCoroutine);
             _playerController.ActivateDashEffect(true);
             _playerData.isLightSpeed = true;
         }
