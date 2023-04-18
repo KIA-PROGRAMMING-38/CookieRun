@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!GameManager.gameOver)
             {
+                _playerData.isHurt = true;
                 _animator.SetTrigger(PlayerAnimID.IS_HURT);
                 StartCoroutine(Invincible());
             }
@@ -80,9 +81,14 @@ public class PlayerController : MonoBehaviour
     IEnumerator Invincible()
     {
         // 무적상태 진입
+        Debug.Log("무적상태");
         _playerData.isInvincible = true;
-        _spriteRenderer.color = _invincibleColor;
-        
+
+        if (_playerData.isHurt)
+        {
+            _spriteRenderer.color = _invincibleColor;    
+        }
+
         // 3초 뒤 무적상태 해제
         yield return _escapeInvincibleTime;
         _spriteRenderer.color = _originalColor;

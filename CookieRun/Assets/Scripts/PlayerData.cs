@@ -16,8 +16,11 @@ public class PlayerData : MonoBehaviour
 
     public bool jumping = false;
 
+    public bool isHurt;
+
     private void Start()
     {
-        Debug.Log(HP);
+        //Debug.Log(HP);
     }
+    
 }

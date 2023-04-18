@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jellybean 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8332548291801131804, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
 --- !u!1 &239006085
@@ -583,6 +587,10 @@ PrefabInstance:
     - target: {fileID: 8332548291801131804, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
       propertyPath: m_Name
       value: Jellybean 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8332548291801131804, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
@@ -2503,6 +2511,7 @@ MonoBehaviour:
   gravityModifier: 10
   isInvincible: 0
   jumping: 0
+  isHurt: 0
 --- !u!1001 &450878688243876166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2516,7 +2525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 450878687682904056, guid: d760ee8d1436f4b6e9a7d3f79c1c91bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.33
+      value: 60.520004
       objectReference: {fileID: 0}
     - target: {fileID: 450878687682904056, guid: d760ee8d1436f4b6e9a7d3f79c1c91bb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2570,6 +2579,10 @@ PrefabInstance:
     - target: {fileID: 6888367146991539993, guid: f04a91169bb84458885ab981e9144582, type: 3}
       propertyPath: m_Name
       value: EnergyPotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6888367146991539993, guid: f04a91169bb84458885ab981e9144582, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6888367146991539994, guid: f04a91169bb84458885ab981e9144582, type: 3}
       propertyPath: m_RootOrder
@@ -2630,7 +2643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7231245831996443930, guid: eee133b8f259b4a27bcc73417e5b421f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.86
+      value: 73.05
       objectReference: {fileID: 0}
     - target: {fileID: 7231245831996443930, guid: eee133b8f259b4a27bcc73417e5b421f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2729,6 +2742,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jellybean 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8332548291801131804, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
 --- !u!1001 &8592303727695186282
@@ -2744,7 +2761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8592303726959168229, guid: 1b34dda4756ca45f8b03f127f08eeef0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.35
+      value: 17.84
       objectReference: {fileID: 0}
     - target: {fileID: 8592303726959168229, guid: 1b34dda4756ca45f8b03f127f08eeef0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2798,6 +2815,10 @@ PrefabInstance:
     - target: {fileID: 8606324198173932930, guid: be8f4a12ef3ab403fafb6cff03d2c006, type: 3}
       propertyPath: m_Name
       value: BearJelly
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606324198173932930, guid: be8f4a12ef3ab403fafb6cff03d2c006, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8606324198173932956, guid: be8f4a12ef3ab403fafb6cff03d2c006, type: 3}
       propertyPath: m_RootOrder
@@ -2855,6 +2876,10 @@ PrefabInstance:
     - target: {fileID: 8756873030311949747, guid: b3fb6df82da934d388520d7a411d922d, type: 3}
       propertyPath: m_Name
       value: BuffItem_Magnet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756873030311949747, guid: b3fb6df82da934d388520d7a411d922d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8756873030311949758, guid: b3fb6df82da934d388520d7a411d922d, type: 3}
       propertyPath: m_RootOrder
