@@ -12,6 +12,7 @@ public class PlayerHurtState : StateMachineBehaviour
     {
         _playerController = animator.GetComponent<PlayerController>();
         _playerData = animator.GetComponent<PlayerData>();
+
         // PlayerHP 깍임
         _playerController.ChangesHpByAmount(_attackValue);
         
@@ -22,6 +23,11 @@ public class PlayerHurtState : StateMachineBehaviour
             animator.SetBool(PlayerAnimID.IS_JUMPING, false);
         }
         
-        Debug.Log(PlayerData.HP);
+        Debug.Log($"적에 닿았다. 플레이어 Hp : {PlayerData.HP}");
+    }
+    
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        _playerData.isHurt = false;
     }
 }

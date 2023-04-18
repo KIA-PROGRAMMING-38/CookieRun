@@ -8,11 +8,12 @@ public class PlayerController : MonoBehaviour
 {
     private Animator _animator;
     private PlayerData _playerData;
-    private float _maxHp = 100f;
     private SpriteRenderer _spriteRenderer;
+    private PlayerAnimController _playerAnimController;
+    private float _maxHp = 100f;
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
-    private WaitForSeconds _escapeInvincibleTime = new WaitForSeconds(3f);
+    private WaitForSeconds _escapeInvincibleTime;
 
     // 자석에 닿았을시 켜지는 센서
     public GameObject magnetSensor;
@@ -22,9 +23,12 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _playerData = GetComponent<PlayerData>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _playerAnimController = GetComponent<PlayerAnimController>();
 
         // 중력 적용
         Physics2D.gravity *= _playerData.gravityModifier;
+
+        _escapeInvincibleTime = new WaitForSeconds(3f);
     }
 
     private void Update()
@@ -51,6 +55,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!GameManager.gameOver)
             {
+                _playerData.isHurt = true;
                 _animator.SetTrigger(PlayerAnimID.IS_HURT);
                 StartCoroutine(Invincible());
             }
@@ -58,7 +63,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // 자석 센서 활성화. 자석이 플레이어에 닿았을 시 호출된다.
-    public void ActivateManeticEffect()
+    public void ActivateMagneticEffect()
     {
         magnetSensor.SetActive(true);
     }
@@ -78,12 +83,31 @@ public class PlayerController : MonoBehaviour
     IEnumerator Invincible()
     {
         // 무적상태 진입
+        Debug.Log("무적상태");
         _playerData.isInvincible = true;
-        _spriteRenderer.color = _invincibleColor;
-        
+
+        if (_playerData.isHurt)
+        {
+            _spriteRenderer.color = _invincibleColor;
+        }
+
+        // Hurt상태가 아닐시
+        else
+        {
+            _playerAnimController.SetAnimSpeed(_playerData.lightSpeed);
+        }
+
         // 3초 뒤 무적상태 해제
         yield return _escapeInvincibleTime;
         _spriteRenderer.color = _originalColor;
+        _playerAnimController.SetAnimSpeed(_playerData.nomalSpeed);
+        
+        Debug.Log("무적상태 해제");
         _playerData.isInvincible = false;
+    }
+
+    public void ActiveInvincibleCoroutine()
+    {
+        StartCoroutine(Invincible());
     }
 }

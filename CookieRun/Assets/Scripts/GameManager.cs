@@ -16,4 +16,6 @@ public class GameManager : MonoBehaviour
     {
         score += scoreToAdd;
     }
+
+    public static float GameSpeed { get; set; }
 }
