@@ -2349,6 +2349,7 @@ GameObject:
   - component: {fileID: 2052268333}
   - component: {fileID: 2052268338}
   - component: {fileID: 2052268339}
+  - component: {fileID: 2052268340}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2512,6 +2513,20 @@ MonoBehaviour:
   isInvincible: 0
   jumping: 0
   isHurt: 0
+  lightSpeed: 1.5
+  nomalSpeed: 1
+--- !u!114 &2052268340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052268332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db50a77362c047a4bb87de0b275ccfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &450878688243876166
 PrefabInstance:
   m_ObjectHideFlags: 0

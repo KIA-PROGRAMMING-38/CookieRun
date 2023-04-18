@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
 {
     private Animator _animator;
     private PlayerData _playerData;
-    private float _maxHp = 100f;
     private SpriteRenderer _spriteRenderer;
+    private PlayerAnimController _playerAnimController;
+    private float _maxHp = 100f;
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
     private WaitForSeconds _escapeInvincibleTime;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _playerData = GetComponent<PlayerData>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _playerAnimController = GetComponent<PlayerAnimController>();
 
         // 중력 적용
         Physics2D.gravity *= _playerData.gravityModifier;
@@ -86,12 +88,20 @@ public class PlayerController : MonoBehaviour
 
         if (_playerData.isHurt)
         {
-            _spriteRenderer.color = _invincibleColor;    
+            _spriteRenderer.color = _invincibleColor;
+        }
+
+        // Hurt상태가 아닐시
+        else
+        {
+            _playerAnimController.SetAnimSpeed(_playerData.lightSpeed);
         }
 
         // 3초 뒤 무적상태 해제
         yield return _escapeInvincibleTime;
         _spriteRenderer.color = _originalColor;
+        _playerAnimController.SetAnimSpeed(_playerData.nomalSpeed);
+        
         Debug.Log("무적상태 해제");
         _playerData.isInvincible = false;
     }
