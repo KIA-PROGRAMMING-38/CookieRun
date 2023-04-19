@@ -18,10 +18,6 @@ public class PlayerController : MonoBehaviour
     
     public ParticleSystem dashParticle;
     public GameObject dashSprite;
-    public GameObject effectManager;
-    
-    // 부딪혔을때 effectManager.ActionPosion = col.transform.position;
-    // effectManager.explosionEffect.testFunc()
 
     private void Awake()
     {
@@ -47,8 +43,6 @@ public class PlayerController : MonoBehaviour
         dashParticle.gameObject.SetActive(active);
         dashSprite.gameObject.SetActive(active);
     }
-
-    
     
 
     // Hp값 변화 메소드
@@ -73,9 +67,6 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("무적상태 해제");
         _playerData.isInvincible = false;
-        
-        // 지우셈 버그 테스트용
-        GameManager.SetDefaultGameSpeed();
     }
 
     public IEnumerator LightSpeedInvincible()

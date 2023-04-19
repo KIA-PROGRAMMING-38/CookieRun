@@ -68,9 +68,8 @@ public class PlayerAnimController : MonoBehaviour
         _animator.speed = speed;
     }
 
-    public void animationAction()
-    {
-        explosionAnimation.gameObject.SetActive(true);
-    }
-    
+    // public void ExplosionAnimationAction()
+    // {
+    //     explosionAnimation.gameObject.SetActive(true);
+    // }
 }
