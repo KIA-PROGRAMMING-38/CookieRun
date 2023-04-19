@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8332548291801131799}
   - component: {fileID: 8332548291801131792}
   - component: {fileID: 8332548291801131793}
-  - component: {fileID: 8332548291801131794}
   - component: {fileID: 8332548291801131795}
   m_Layer: 8
   m_Name: Jellybean
@@ -100,19 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jellyScore: 1000
---- !u!114 &8332548291801131794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8332548291801131804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff5712a09ad5b4200bb45a016a9d6e6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveLeftSpeed: 7
 --- !u!61 &8332548291801131795
 BoxCollider2D:
   m_ObjectHideFlags: 0
