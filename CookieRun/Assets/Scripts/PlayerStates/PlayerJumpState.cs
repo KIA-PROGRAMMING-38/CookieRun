@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Sprites;
+using PlayerAnimationID;
 using UnityEngine;
 
 public class PlayerJumpState : StateMachineBehaviour

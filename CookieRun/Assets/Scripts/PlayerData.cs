@@ -18,6 +18,8 @@ public class PlayerData : MonoBehaviour
 
     public bool isHurt;
 
+    public bool isLightSpeed;
+
     public float lightSpeed = 2f;
 
     public float nomalSpeed = 1f;
