@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemyAnimationID;
 
-public class Enemy : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     private PlayerData _playerData;
     private SpriteRenderer _spriteRenderer;
