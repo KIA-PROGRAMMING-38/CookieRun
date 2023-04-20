@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         gameOver = false;
+        GameSpeed = 1f;
     }
 
     // 점수를 추가하는 메소드
@@ -21,6 +22,6 @@ public class GameManager : MonoBehaviour
 
     public static void SetDefaultGameSpeed()
     {
-        GameSpeed /= 2f;
+        GameSpeed = 1f;
     }
 }

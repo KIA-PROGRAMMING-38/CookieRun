@@ -8,16 +8,11 @@ public class MoveLeft : MonoBehaviour
 {
     public float moveLeftSpeed;
 
-    private void Start()
-    {
-        GameManager.GameSpeed = moveLeftSpeed;
-    }
-
     void Update()
     {
         if (!GameManager.gameOver)
         {
-            transform.Translate(Vector3.left * Time.deltaTime * GameManager.GameSpeed);
+            transform.Translate(Vector3.left * Time.deltaTime * moveLeftSpeed * GameManager.GameSpeed);
         }
     }
 }
