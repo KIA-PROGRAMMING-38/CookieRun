@@ -16,6 +16,8 @@ public class SpawnManager : MonoBehaviour
     private int _lastIndex;
     private WaitForSeconds _waitForSeconds;
     private IEnumerator _spawnCoroutine;
+    private int _currentIndex;
+    private int _previousIndex;
     
     private void Start()
     {
@@ -30,12 +32,21 @@ public class SpawnManager : MonoBehaviour
     {
         while (!GameManager.gameOver)
         {
-            _sectionPoolIndex = Random.Range(_firstIndex, _lastIndex);
+            // 1
+            _currentIndex = Random.Range(_firstIndex, _lastIndex);
 
-            Section section = _sectionPools[_sectionPoolIndex].SpawnSection();
+            // 이전인덱스가 현재 인덱스가 아닐때까지
+            while (_currentIndex == _previousIndex)
+            {
+                _currentIndex = Random.Range(_firstIndex, _lastIndex);
+            }
+
+            _previousIndex = _currentIndex;
+
+            Section section = _sectionPools[_currentIndex].SpawnSection();
             section.transform.position = _spawnPosition.position;
             
-            Debug.Log($"{_sectionPoolIndex}번째 {_sectionPools[_sectionPoolIndex].name} 실행됨");
+            Debug.Log($"{_currentIndex}번째 {_sectionPools[_currentIndex].name} 실행됨");
             yield return _waitForSeconds;
         }
     }

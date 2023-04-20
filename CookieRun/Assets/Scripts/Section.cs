@@ -19,7 +19,6 @@ public class Section : MonoBehaviour
     {
         if (col.CompareTag("LeftBound"))
         {
-            Debug.Log($"{gameObject.name}이 충돌한 오브젝트 : {col.name}");
             DestroySection();
         }
     }
