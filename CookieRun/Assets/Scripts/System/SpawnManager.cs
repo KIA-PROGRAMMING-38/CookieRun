@@ -32,7 +32,6 @@ public class SpawnManager : MonoBehaviour
     {
         while (!GameManager.gameOver)
         {
-            // 1
             _currentIndex = Random.Range(_firstIndex, _lastIndex);
 
             // 이전인덱스가 현재 인덱스가 아닐때까지
