@@ -32,7 +32,7 @@ public class MagneticEffect : MonoBehaviour
         if (Time.fixedTime >= _startTime + Duration)
         {
             // 컴포넌트 비활성화
-            enabled = false;
+            gameObject.SetActive(false);
         }
 
         _targetPosition = new Vector3(_playerTransform.position.x, _playerTransform.position.y -1f, _playerTransform.position.z);

@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
     public IEnumerator Invincible()
     {
         // 무적상태 진입
-        Debug.Log("무적상태");
         _playerData.isInvincible = true;
 
         _spriteRenderer.color = _invincibleColor;
@@ -64,33 +63,28 @@ public class PlayerController : MonoBehaviour
         
         // 바뀌었던 색을 원래대로 되돌린다.
         _spriteRenderer.color = _originalColor;
-
-        Debug.Log("무적상태 해제");
+        
         _playerData.isInvincible = false;
     }
 
     public IEnumerator LightSpeedInvincible()
     {
-        Debug.Log("광속질주 무적!!");
-
         _playerData.isInvincible = true;
-        
+
         _playerAnimController.SetAnimSpeed(_playerData.lightSpeed);
         
         yield return _escapeInvincibleTime;
         
         // LightSpeed 상태에서 빨라졌던 플레이어의 애니메이션을 되돌린다.
         _playerAnimController.SetAnimSpeed(_playerData.nomalSpeed);
-        
         // GameSpeed를 원래대로 되돌린다.
         GameManager.SetDefaultGameSpeed();
-        
+
         // dashEffect 비활성화
         ActivateDashEffect(false);
         
         _playerData.isLightSpeed = false;
         
-        Debug.Log("무적상태 해제");
         _playerData.isInvincible = false;
     }
 
