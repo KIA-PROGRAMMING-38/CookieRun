@@ -11,7 +11,7 @@ public class PlayerAnimController : MonoBehaviour
     private PlayerData _playerData;
     private PlayerController _playerController;
     public GameObject explosionAnimation;
-    private IEnumerator _nomalInvicible;
+    
 
     private void Awake()
     {
@@ -19,12 +19,7 @@ public class PlayerAnimController : MonoBehaviour
         _playerData = GetComponent<PlayerData>();
         _playerController = GetComponent<PlayerController>();
     }
-
-    private void Start()
-    {
-        _nomalInvicible = _playerController.Invincible();
-    }
-
+    
     private void Update()
     {
         // 어느 상태던지 hp가 0이면 Die상태가 된다.
@@ -51,7 +46,7 @@ public class PlayerAnimController : MonoBehaviour
             {
                 _animator.SetTrigger(PlayerAnimID.IS_HURT);
                 _playerData.isHurt = true;
-                _playerController.SetActiveCoroutine(_nomalInvicible);
+                
             }
         }
     }
