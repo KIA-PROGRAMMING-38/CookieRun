@@ -9,10 +9,10 @@ public class PlayerData : MonoBehaviour
     // 중력에 적용할 힘
     public float gravityModifier;
     // 무적 상태 체크
-    public bool isInvincible = false;
+    public static bool isInvincible = false;
 
     // test hp = 50 -> 100으로 변경 예정.
-    public static float HP = 50f;
+    public static float HP = 100f;
 
     public bool jumping = false;
 
@@ -23,4 +23,5 @@ public class PlayerData : MonoBehaviour
     public float lightSpeed = 2f;
 
     public float nomalSpeed = 1f;
+
 }

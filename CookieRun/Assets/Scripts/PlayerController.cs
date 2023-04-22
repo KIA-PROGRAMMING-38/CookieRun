@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     public IEnumerator Invincible()
     {
         // 무적상태 진입
-        _playerData.isInvincible = true;
+        PlayerData.isInvincible = true;
 
         _spriteRenderer.color = _invincibleColor;
 
@@ -64,12 +64,12 @@ public class PlayerController : MonoBehaviour
         // 바뀌었던 색을 원래대로 되돌린다.
         _spriteRenderer.color = _originalColor;
         
-        _playerData.isInvincible = false;
+        PlayerData.isInvincible = false;
     }
 
     public IEnumerator LightSpeedInvincible()
     {
-        _playerData.isInvincible = true;
+        PlayerData.isInvincible = true;
 
         _playerAnimController.SetAnimSpeed(_playerData.lightSpeed);
         
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         
         _playerData.isLightSpeed = false;
         
-        _playerData.isInvincible = false;
+        PlayerData.isInvincible = false;
     }
 
     public void SetActiveCoroutine(IEnumerator enumerator)
