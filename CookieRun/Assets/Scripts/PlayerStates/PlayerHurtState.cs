@@ -23,7 +23,6 @@ public class PlayerHurtState : StateMachineBehaviour
             animator.SetBool(PlayerAnimID.IS_JUMPING, false);
         }
         
-        Debug.Log($"적에 닿았다. 플레이어 Hp : {PlayerData.HP}");
     }
     
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

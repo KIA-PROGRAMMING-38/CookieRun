@@ -12,7 +12,7 @@ public class PlayerData : MonoBehaviour
     public static bool isInvincible = false;
 
     // test hp = 50 -> 100으로 변경 예정.
-    public static float HP = 100f;
+    public float maxHp;
 
     public bool jumping = false;
 

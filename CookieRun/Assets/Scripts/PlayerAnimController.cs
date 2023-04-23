@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using PlayerAnimationID;
+using Model;
 
 public class PlayerAnimController : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class PlayerAnimController : MonoBehaviour
     private void Update()
     {
         // 어느 상태던지 hp가 0이면 Die상태가 된다.
-        if (PlayerData.HP <= 0)
+        if (CookieUIModel.Hp <= 0)
         {
             _animator.Play("Die");
         }
@@ -67,9 +68,4 @@ public class PlayerAnimController : MonoBehaviour
     {
         _animator.speed = speed;
     }
-
-    // public void ExplosionAnimationAction()
-    // {
-    //     explosionAnimation.gameObject.SetActive(true);
-    // }
 }
