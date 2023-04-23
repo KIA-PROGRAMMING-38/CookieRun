@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4810560326817956589}
   - component: {fileID: 1773260298}
   m_Layer: 0
-  m_Name: Section 2
+  m_Name: EasySection 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,18 +10,29 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private SectionPool[] _sectionPools;
     [SerializeField] private Transform _spawnPosition;
     [SerializeField] private float _spawnCoolTime = 3f;
-
-    private int _sectionPoolIndex;
+    
     private int _firstIndex = 0;
-    private int _lastIndex;
+    private int _lastIndexOfEasySection = 2;
+    private int normalSectionStartIndex = 3;
+    private int _normalSectionIndex;
+    private int _sectionIndex;
     private WaitForSeconds _waitForSeconds;
     private IEnumerator _spawnCoroutine;
-    private int _currentIndex;
-    private int _previousIndex;
+
+    enum SectionSet
+    {
+        Default = 0,
+        EasySection,
+        NomalSection
+    }
+
+    private SectionSet _section;
     
     private void Start()
     {
-        _lastIndex = _sectionPools.Length;
+        _section = SectionSet.Default;
+        _normalSectionIndex = normalSectionStartIndex;
+        
         _spawnCoroutine = SpawnCoroutineHelper();
         _waitForSeconds = new WaitForSeconds(_spawnCoolTime);
         
@@ -32,20 +43,36 @@ public class SpawnManager : MonoBehaviour
     {
         while (!GameManager.gameOver)
         {
-            _currentIndex = Random.Range(_firstIndex, _lastIndex);
-
-            // 이전인덱스가 현재 인덱스가 아닐때까지
-            while (_currentIndex == _previousIndex)
+            // EasySection을 뽑는다.
+            if (_section == SectionSet.Default)
             {
-                _currentIndex = Random.Range(_firstIndex, _lastIndex);
+                _sectionIndex = Random.Range(_firstIndex, _lastIndexOfEasySection + 1);
+                _section = SectionSet.EasySection;
             }
 
-            _previousIndex = _currentIndex;
+            // normalSection을 차례대로 실행한다.
+            else
+            {
+                _sectionIndex = _normalSectionIndex;
+                ++_normalSectionIndex;
 
-            Section section = _sectionPools[_currentIndex].SpawnSection();
+                // 순서대로 다 실행했다면 normalSectionIndex를 초기화 시키고 다시 EasySection을 뽑을 수 있게 section을 설정한다.
+                if (_normalSectionIndex >= _sectionPools.Length)
+                {
+                    _normalSectionIndex = normalSectionStartIndex;
+                    _section = SectionSet.Default;
+                }
+                
+                else
+                {
+                    _section = SectionSet.NomalSection;
+                }
+            }
+            
+            Section section = _sectionPools[_sectionIndex].SpawnSection();
             section.transform.position = _spawnPosition.position;
             
-            Debug.Log($"{_currentIndex}번째 {_sectionPools[_currentIndex].name} 실행됨");
+            Debug.Log($"{_sectionIndex}번째 {_sectionPools[_sectionIndex].name} 실행됨");
             yield return _waitForSeconds;
         }
     }
