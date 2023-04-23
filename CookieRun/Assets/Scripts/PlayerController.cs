@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Model;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,10 +9,11 @@ public class PlayerController : MonoBehaviour
     private PlayerData _playerData;
     private SpriteRenderer _spriteRenderer;
     private PlayerAnimController _playerAnimController;
-    private float _maxHp = 100f;
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
     private WaitForSeconds _escapeInvincibleTime;
+
+    private float _deltaTime;
 
     // 자석에 닿았을시 켜지는 센서
     public GameObject magnetSensor;
@@ -29,6 +31,21 @@ public class PlayerController : MonoBehaviour
         Physics2D.gravity *= _playerData.gravityModifier;
 
         _escapeInvincibleTime = new WaitForSeconds(3f);
+
+        CookieUIModel.MaxHp = _playerData.maxHp;
+        CookieUIModel.Hp = _playerData.maxHp;
+    }
+
+    private void Update()
+    {
+        _deltaTime = Time.deltaTime;
+        
+        if (!PlayerData.isInvincible && !GameManager.gameOver)
+        {
+            CookieUIModel.Hp -= _deltaTime;
+            
+            Debug.Log($"쿠키 Hp : {CookieUIModel.Hp}");
+        }
     }
 
     // 자석 센서 활성화. 자석이 플레이어에 닿았을 시 호출된다.
@@ -48,7 +65,7 @@ public class PlayerController : MonoBehaviour
     // Hp값 변화 메소드
     public void ChangesHpByAmount(float amount)
     {
-        PlayerData.HP = Mathf.Clamp(PlayerData.HP + amount, 0, _maxHp);
+        CookieUIModel.Hp = Mathf.Clamp(CookieUIModel.Hp + amount, 0, CookieUIModel.MaxHp);
     }
     
     public IEnumerator Invincible()
