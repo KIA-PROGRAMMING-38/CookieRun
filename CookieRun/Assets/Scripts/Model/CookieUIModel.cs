@@ -8,7 +8,9 @@ namespace Model
     public static class CookieUIModel
     {
         public static event Action OnChangeHp;
-
+        public static event Action OnChangeScore;
+        
+        // HP
         private static float _maxHp;
         public static float MaxHp
         {
@@ -28,6 +30,20 @@ namespace Model
             {
                 _hp = value;
                 OnChangeHp?.Invoke();
+            }
+        }
+        
+        // Score
+        private static float _score;
+
+        public static float Score
+        {
+            get => _score;
+
+            set
+            {
+                _score = value;
+                OnChangeScore?.Invoke();
             }
         }
     }    

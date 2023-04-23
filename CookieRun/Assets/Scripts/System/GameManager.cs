@@ -7,7 +7,7 @@ using Model;
 public class GameManager : MonoBehaviour
 {
     public static bool gameOver;
-    private static float _score;
+    // private static float _score;
     private float _elapsedTime;
 
     private void Awake()
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     // 점수를 추가하는 메소드
     public static void UpdateScore(float scoreToAdd)
     {
-        _score += scoreToAdd;
+        CookieUIModel.Score += scoreToAdd;
     }
 
     public static float GameSpeed { get; set; }
