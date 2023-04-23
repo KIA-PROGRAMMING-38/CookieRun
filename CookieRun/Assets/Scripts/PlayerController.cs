@@ -43,8 +43,6 @@ public class PlayerController : MonoBehaviour
         if (!PlayerData.isInvincible && !GameManager.gameOver)
         {
             CookieUIModel.Hp -= _deltaTime;
-            
-            Debug.Log($"쿠키 Hp : {CookieUIModel.Hp}");
         }
     }
 
