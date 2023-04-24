@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5839036195982563224
 Transform:
   m_ObjectHideFlags: 0
@@ -145,10 +145,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jellybean 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8332548291801131804, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
 --- !u!4 &6487202964900661193 stripped
@@ -211,10 +207,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jellybean 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8332548291801131804, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
 --- !u!4 &5098300273914737799 stripped
@@ -232,10 +224,6 @@ PrefabInstance:
     - target: {fileID: 6888367146991539993, guid: f04a91169bb84458885ab981e9144582, type: 3}
       propertyPath: m_Name
       value: EnergyPotion
-      objectReference: {fileID: 0}
-    - target: {fileID: 6888367146991539993, guid: f04a91169bb84458885ab981e9144582, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6888367146991539994, guid: f04a91169bb84458885ab981e9144582, type: 3}
       propertyPath: m_RootOrder
@@ -281,8 +269,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6888367146991540197, guid: f04a91169bb84458885ab981e9144582, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f04a91169bb84458885ab981e9144582, type: 3}
 --- !u!4 &1659657310635336391 stripped
 Transform:
@@ -299,10 +286,6 @@ PrefabInstance:
     - target: {fileID: 8756873030311949747, guid: b3fb6df82da934d388520d7a411d922d, type: 3}
       propertyPath: m_Name
       value: BuffItem_Magnet
-      objectReference: {fileID: 0}
-    - target: {fileID: 8756873030311949747, guid: b3fb6df82da934d388520d7a411d922d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8756873030311949758, guid: b3fb6df82da934d388520d7a411d922d, type: 3}
       propertyPath: m_RootOrder
@@ -348,8 +331,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8756873030311949744, guid: b3fb6df82da934d388520d7a411d922d, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3fb6df82da934d388520d7a411d922d, type: 3}
 --- !u!4 &1659657310779352161 stripped
 Transform:
@@ -410,10 +392,6 @@ PrefabInstance:
     - target: {fileID: 8332548291801131804, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
       propertyPath: m_Name
       value: Jellybean 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8332548291801131804, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e177ed1d0ca4ad4a5f251d665ca505, type: 3}

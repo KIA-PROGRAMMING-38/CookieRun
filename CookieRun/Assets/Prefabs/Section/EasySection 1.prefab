@@ -144,8 +144,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: HaningEnemy
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7231245831996444007, guid: eee133b8f259b4a27bcc73417e5b421f, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eee133b8f259b4a27bcc73417e5b421f, type: 3}
 --- !u!4 &5449424219298478980 stripped
 Transform:
@@ -207,8 +206,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightSpeedItem
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7080434633550559490, guid: 7cc8331d479d44d72a54566c0b0c45d6, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cc8331d479d44d72a54566c0b0c45d6, type: 3}
 --- !u!4 &5931641460136717803 stripped
 Transform:
@@ -270,8 +268,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8592303726959168250, guid: 1b34dda4756ca45f8b03f127f08eeef0, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b34dda4756ca45f8b03f127f08eeef0, type: 3}
 --- !u!4 &5449424220266625483 stripped
 Transform:
@@ -333,8 +330,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigEnemy
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 450878687682904061, guid: d760ee8d1436f4b6e9a7d3f79c1c91bb, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d760ee8d1436f4b6e9a7d3f79c1c91bb, type: 3}
 --- !u!4 &5449424220460483834 stripped
 Transform:
