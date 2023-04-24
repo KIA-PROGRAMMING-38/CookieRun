@@ -16,6 +16,8 @@ public class SpawnManager : MonoBehaviour
     private int normalSectionStartIndex = 3;
     private int _normalSectionIndex;
     private int _sectionIndex;
+    private int _previousIndex;
+    
     private WaitForSeconds _waitForSeconds;
     private IEnumerator _spawnCoroutine;
 
@@ -47,6 +49,14 @@ public class SpawnManager : MonoBehaviour
             if (_section == SectionSet.Default)
             {
                 _sectionIndex = Random.Range(_firstIndex, _lastIndexOfEasySection + 1);
+                
+                while (_sectionIndex == _previousIndex)
+                {
+                    _sectionIndex = Random.Range(_firstIndex, _lastIndexOfEasySection + 1);    
+                }
+
+                _previousIndex = _sectionIndex;
+                
                 _section = SectionSet.EasySection;
             }
 
