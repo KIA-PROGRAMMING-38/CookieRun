@@ -3,9 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreItemCollider : MonoBehaviour
+public class Jelly : MonoBehaviour
 {
     public float jellyScore;
+
+    private Vector2 _initialPosition;
+
+    private void Awake()
+    {
+        _initialPosition = transform.localPosition;
+    }
+
+    private void OnEnable()
+    {
+        transform.localPosition = _initialPosition;
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {

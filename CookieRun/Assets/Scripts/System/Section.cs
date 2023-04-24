@@ -9,6 +9,20 @@ using UnityEngine.Pool;
 public class Section : MonoBehaviour
 {
     private IObjectPool<Section> _managedPool;
+    private Transform[] _allChildren;
+
+    private void Awake()
+    {
+        _allChildren = GetComponentsInChildren<Transform>();
+    }
+
+    private void OnEnable()
+    {
+        foreach (Transform child in _allChildren)
+        {
+            child.gameObject.SetActive(true);
+        }
+    }
 
     public void SetManagedPool(IObjectPool<Section> pool)
     {

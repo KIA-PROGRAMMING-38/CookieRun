@@ -22,8 +22,12 @@ public class EnemyController : MonoBehaviour
 
         if (_playerData != null && _playerData.isLightSpeed)
         {
-            _spriteRenderer.sprite = null;
             _animator.SetTrigger(EnemyAnimID.IS_EXPLOSION);
         }
+    }
+
+    public void SetIdleAnimation()
+    {
+        _animator.Play("Idle");
     }
 }
