@@ -45,39 +45,7 @@ public class SpawnManager : MonoBehaviour
     {
         while (!GameManager.gameOver)
         {
-            // EasySection을 뽑는다.
-            if (_section == SectionSet.Default)
-            {
-                _sectionIndex = Random.Range(_firstIndex, _lastIndexOfEasySection + 1);
-                
-                while (_sectionIndex == _previousIndex)
-                {
-                    _sectionIndex = Random.Range(_firstIndex, _lastIndexOfEasySection + 1);    
-                }
-
-                _previousIndex = _sectionIndex;
-                
-                _section = SectionSet.EasySection;
-            }
-
-            // normalSection을 차례대로 실행한다.
-            else
-            {
-                _sectionIndex = _normalSectionIndex;
-                ++_normalSectionIndex;
-
-                // 순서대로 다 실행했다면 normalSectionIndex를 초기화 시키고 다시 EasySection을 뽑을 수 있게 section을 설정한다.
-                if (_normalSectionIndex >= _sectionPools.Length)
-                {
-                    _normalSectionIndex = normalSectionStartIndex;
-                    _section = SectionSet.Default;
-                }
-                
-                else
-                {
-                    _section = SectionSet.NomalSection;
-                }
-            }
+            _sectionIndex = GetSectionIndex();
             
             Section section = _sectionPools[_sectionIndex].SpawnSection();
             section.transform.position = _spawnPosition.position;
@@ -85,5 +53,44 @@ public class SpawnManager : MonoBehaviour
             Debug.Log($"{_sectionIndex}번째 {_sectionPools[_sectionIndex].name} 실행됨");
             yield return _waitForSeconds;
         }
+    }
+
+    private int GetSectionIndex()
+    {
+        // EasySection을 뽑는다.
+        if (_section == SectionSet.Default)
+        {
+            _sectionIndex = Random.Range(_firstIndex, _lastIndexOfEasySection + 1);
+                
+            while (_sectionIndex == _previousIndex)
+            {
+                _sectionIndex = Random.Range(_firstIndex, _lastIndexOfEasySection + 1);    
+            }
+
+            _previousIndex = _sectionIndex;
+                
+            _section = SectionSet.EasySection;
+        }
+
+        // normalSection을 차례대로 실행한다.
+        else
+        {
+            _sectionIndex = _normalSectionIndex;
+            ++_normalSectionIndex;
+
+            // 순서대로 다 실행했다면 normalSectionIndex를 초기화 시키고 다시 EasySection을 뽑을 수 있게 section을 설정한다.
+            if (_normalSectionIndex >= _sectionPools.Length)
+            {
+                _normalSectionIndex = normalSectionStartIndex;
+                _section = SectionSet.Default;
+            }
+                
+            else
+            {
+                _section = SectionSet.NomalSection;
+            }
+        }
+
+        return _sectionIndex;
     }
 }
