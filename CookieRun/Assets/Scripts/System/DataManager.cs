@@ -34,6 +34,7 @@ public static class DataManager
     {
         string filePath = Path.Combine(SPRITE_FILE_ROOT_DIRECTORY, JELLY_DIRECTORY, filename);
 
+        Debug.Log(Resources.Load<Sprite>(filePath));
         return Resources.Load<Sprite>(filePath);
     }
 }

@@ -24,7 +24,7 @@ public class SectionPool : MonoBehaviour
     // 게임이 끝날때까지 Section을 생성해야 한다.
     public Section SpawnSection()
     {
-        var section = _pool.Get();
+        Section section = _pool.Get();
 
         return section;
     }
