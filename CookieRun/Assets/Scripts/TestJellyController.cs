@@ -10,14 +10,6 @@ public class TestJellyController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private CircleCollider2D _circleCollider;
 
-    private void Awake()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _circleCollider = GetComponent<CircleCollider2D>();
-        
-        Activate(JellyKind.BearPink);
-    }
-
     public void Activate(JellyKind jellyKind)
     {
         // if (gameObject.activeSelf)
@@ -31,7 +23,11 @@ public class TestJellyController : MonoBehaviour
 
     private void BindData()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _circleCollider = GetComponent<CircleCollider2D>();
+        
         string spriteName = $"jelly_{_jellyData.SpriteName}";
+        
         _spriteRenderer.sprite = DataManager.LoadSprite(spriteName);
         
         ResizeCollider();

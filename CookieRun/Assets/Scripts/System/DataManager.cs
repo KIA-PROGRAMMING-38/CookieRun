@@ -33,7 +33,6 @@ public static class DataManager
     public static Sprite LoadSprite(string filename)
     {
         string filePath = Path.Combine(SPRITE_FILE_ROOT_DIRECTORY, JELLY_DIRECTORY, filename);
-        Debug.Log(filePath);
 
         return Resources.Load<Sprite>(filePath);
     }

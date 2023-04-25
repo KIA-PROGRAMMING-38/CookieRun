@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8606324198173932956}
   - component: {fileID: 8606324198173932931}
-  - component: {fileID: 8606324198173932958}
   - component: {fileID: 8606324198173932959}
+  - component: {fileID: 311040478}
   m_Layer: 8
   m_Name: BearJelly
   m_TagString: Jelly
@@ -86,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8606324198173932958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8606324198173932930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffaf2cfa060654fab8492b00efba2f6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jellyScore: 5000
 --- !u!58 &8606324198173932959
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -115,3 +102,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.92414117
+--- !u!114 &311040478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8606324198173932930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d4b26264a164ce785da043acf39f5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
