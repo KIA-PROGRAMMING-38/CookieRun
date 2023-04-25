@@ -15,10 +15,7 @@ public class Section : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (Transform child in gameObject.transform)
-        {
-            child.gameObject.SetActive(true);
-        }
+        SetActiveRecursively(gameObject.transform, true);
         
         _rootJellybean = GetComponentInChildren<RootJellyBean>();
         _rootBearPink = GetComponentInChildren<RootBearPink>();
@@ -26,12 +23,22 @@ public class Section : MonoBehaviour
         ActivateJellyChildren(_rootJellybean.gameObject.transform, JellyKind.JellyBean);
         ActivateJellyChildren(_rootBearPink.gameObject.transform, JellyKind.BearPink);
     }
+    
+    public void SetActiveRecursively(Transform parent, bool active)
+    {
+        parent.gameObject.SetActive(active);
+
+        foreach (Transform child in parent)
+        {
+            SetActiveRecursively(child, active);
+        }
+    }
 
     private void ActivateJellyChildren(Transform root, JellyKind jellyKind)
     {
         foreach (Transform child in root)
         {
-            TestJellyController jellyController = child.GetComponent<TestJellyController>();
+            JellyController jellyController = child.GetComponent<JellyController>();
             jellyController.Activate(jellyKind);
         }
     }

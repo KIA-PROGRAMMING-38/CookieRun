@@ -3,20 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestJellyController : MonoBehaviour
+public class JellyController : MonoBehaviour
 {
     private Jelly _jellyData;
 
     private SpriteRenderer _spriteRenderer;
     private CircleCollider2D _circleCollider;
+    
+    private Vector2 _initialPosition;
+    
+    private void Awake()
+    {
+        _initialPosition = transform.localPosition;
+    }
+
+    private void OnEnable()
+    {
+        transform.localPosition = _initialPosition;
+    }
 
     public void Activate(JellyKind jellyKind)
     {
-        // if (gameObject.activeSelf)
-        // {
-        //     return;
-        // }
-        
         _jellyData = DataManager.Jellies[(int)jellyKind];
         BindData();
     }
