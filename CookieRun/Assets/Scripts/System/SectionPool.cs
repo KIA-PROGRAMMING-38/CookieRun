@@ -7,6 +7,7 @@ using UnityEngine.Pool;
 
 public class SectionPool : MonoBehaviour
 {
+    private WaitForSeconds _spawnCoolTime = new WaitForSeconds(1f);
 
     private IObjectPool<Section> _pool;
 

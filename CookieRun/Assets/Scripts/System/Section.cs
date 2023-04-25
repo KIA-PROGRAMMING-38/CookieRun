@@ -8,19 +8,31 @@ using UnityEngine.Pool;
 
 public class Section : MonoBehaviour
 {
+    private RootJellyBean _rootJellybean;
+    private RootBearPink _rootBearPink;
+    
     private IObjectPool<Section> _managedPool;
-    private Transform[] _allChildren;
-
-    private void Awake()
-    {
-        _allChildren = GetComponentsInChildren<Transform>();
-    }
 
     private void OnEnable()
     {
-        foreach (Transform child in _allChildren)
+        foreach (Transform child in gameObject.transform)
         {
             child.gameObject.SetActive(true);
+        }
+        
+        _rootJellybean = GetComponentInChildren<RootJellyBean>();
+        _rootBearPink = GetComponentInChildren<RootBearPink>();
+
+        ActivateJellyChildren(_rootJellybean.gameObject.transform, JellyKind.JellyBean);
+        ActivateJellyChildren(_rootBearPink.gameObject.transform, JellyKind.BearPink);
+    }
+
+    private void ActivateJellyChildren(Transform root, JellyKind jellyKind)
+    {
+        foreach (Transform child in root)
+        {
+            TestJellyController jellyController = child.GetComponent<TestJellyController>();
+            jellyController.Activate(jellyKind);
         }
     }
 
