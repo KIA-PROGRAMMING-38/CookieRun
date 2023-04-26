@@ -7,12 +7,13 @@ using UnityEngine.Serialization;
 public class MoveLeft : MonoBehaviour
 {
     public float moveLeftSpeed;
+    private Vector2 _moveleft = Vector2.left;
 
     void Update()
     {
         if (!GameManager.gameOver)
         {
-            transform.Translate(Vector3.left * Time.deltaTime * moveLeftSpeed * GameManager.GameSpeed);
+            transform.Translate(_moveleft * Time.deltaTime * moveLeftSpeed * GameManager.GameSpeed);
         }
     }
 }
