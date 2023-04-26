@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: larva_AnimLarvaBig
+  m_Name: enemy_AnimLarvaBig
   m_Controller: {fileID: 9100000, guid: f5dcf97bc93ac43f985071351a2c5650, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: e7375105a03fc414ca60b477c8bf47ec, type: 2}
