@@ -35,7 +35,7 @@ public class JellyController : MonoBehaviour
         
         string spriteName = $"jelly_{_jellyData.SpriteName}";
         
-        _spriteRenderer.sprite = DataManager.LoadSprite(spriteName);
+        _spriteRenderer.sprite = DataManager.LoadJellySprite(spriteName);
         
         ResizeCollider();
     }
