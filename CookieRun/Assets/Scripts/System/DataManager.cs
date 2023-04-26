@@ -47,7 +47,6 @@ public static class DataManager
     public static Sprite LoadEnemySprite(string filename)
     {
         string filePath = Path.Combine(SPRITE_FILE_ROOT_DIRECTORY, ENEMY_DIRECTORY, filename);
-        
         return Resources.Load<Sprite>(filePath);
     }
 
@@ -55,6 +54,7 @@ public static class DataManager
     public static RuntimeAnimatorController LoadAnimatorController(string filename)
     {
         string filePath = Path.Combine(ANIMATOR_FILE_ROOT_DIRECTORY, ENEMY_DIRECTORY, filename);
+        filePath = filePath.Replace("\r", "");
         
         return Resources.Load<RuntimeAnimatorController>(filePath);
     }
