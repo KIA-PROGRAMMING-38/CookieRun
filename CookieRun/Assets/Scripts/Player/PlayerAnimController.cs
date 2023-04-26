@@ -11,7 +11,6 @@ public class PlayerAnimController : MonoBehaviour
     private Animator _animator;
     private PlayerData _playerData;
     private PlayerController _playerController;
-    public GameObject explosionAnimation;
     private IEnumerator _nomalInvicible;
 
     private void Awake()

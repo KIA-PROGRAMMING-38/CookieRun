@@ -29,6 +29,5 @@ public class EnemyController : MonoBehaviour
     public void SetIdleAnimation()
     {
         _animator.Play("Idle");
-        Animation animation;
     }
 }
