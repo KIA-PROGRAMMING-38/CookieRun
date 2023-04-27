@@ -9,28 +9,20 @@ using UnityEngine.Pool;
 public class Section : MonoBehaviour
 {
     private IObjectPool<Section> _managedPool;
-    
-    // private void OnEnable()
-    // {
-    //     SetActiveRecursively(gameObject.transform, true);
-    // }
 
-    public void SetActiveRecursively(Transform parent, bool active)
+    private void OnEnable()
     {
-        parent.gameObject.SetActive(active);
-
-        foreach (Transform child in parent)
-        {
-            SetActiveRecursively(child, active);
-        }
+        Activate();
     }
 
-    private void ActivateChildren(Transform root)
+    public void Activate()
     {
-        foreach (Transform child in root)
+        gameObject.SetActive(true);
+        int childCount = transform.childCount;
+        for (int i = 0; i < childCount; ++i)
         {
-            JellyController jellyController = child.GetComponent<JellyController>();
-            
+            Transform child = transform.GetChild(i);
+            child.gameObject.SetActive(true);
         }
     }
 
@@ -39,13 +31,13 @@ public class Section : MonoBehaviour
     //     _managedPool = pool;
     // }
     //
-    // private void OnTriggerEnter2D(Collider2D col)
-    // {
-    //     if (col.CompareTag("LeftBound"))
-    //     {
-    //         DestroySection();
-    //     }
-    // }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("LeftBound"))
+        {
+            gameObject.SetActive(false);
+        }
+    }
     //
     // // LeftBound에 충돌하면 호출할 메소드
     // public void DestroySection()

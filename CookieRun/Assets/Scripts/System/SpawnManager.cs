@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private SectionPool[] _sectionPools;
     [SerializeField] private Transform _spawnPosition;
-    [SerializeField] private float _spawnCoolTime = 3f;
+    [SerializeField] private float _spawnCoolTime = 4f;
     
     private int _firstIndex = 0;
     private int _lastIndexOfEasySection = 2;
@@ -49,13 +49,17 @@ public class SpawnManager : MonoBehaviour
         _section = SectionSet.Default;
         _normalSectionIndex = normalSectionStartIndex;
 
-        _spawnCoroutine = SpawnSection();
+        _spawnCoroutine = SpawnSection(); 
         _waitForSeconds = new WaitForSeconds(_spawnCoolTime);
+        
+        _sectionInstance = new Section[DataManager.Sections[(int)SectionType.Easy].Length];
         
         StartCoroutine(_spawnCoroutine);
         
         GameManager.OnGameEnd -= StopSpawnSection;
         GameManager.OnGameEnd += StopSpawnSection;
+
+        
     }
     
     private void StopSpawnSection()
@@ -63,13 +67,42 @@ public class SpawnManager : MonoBehaviour
         StopCoroutine(_spawnCoroutine);
     }
 
+    private Section[] _sectionInstance;
     IEnumerator SpawnSection()
     {
         while (true)
         {
-            _sectionIndex = GetSectionIndex();
-            _sections[_sectionIndex].gameObject.SetActive(true);
-            Debug.Log($"현재 섹션 : {_sections[_sectionIndex]}");
+            // _sectionIndex = GetSectionIndex();
+            // _sections[_sectionIndex].gameObject.SetActive(true);
+            // _sections[_sectionIndex].transform.position = _spawnPosition.position;
+            //
+            // Debug.Log($"현재 섹션 : {_sections[_sectionIndex]}");
+            int randomIndex = Random.Range(0, 2);
+            Section sectionPrefab = DataManager.Sections[(int)SectionType.Easy][randomIndex];
+
+            if (_sectionInstance[randomIndex] == null)
+            {
+                _sectionInstance[randomIndex] = Instantiate(sectionPrefab);    
+            }
+
+            else
+            {
+                _sectionInstance[randomIndex].Activate();
+            }
+
+
+
+            // if (_isSpawned == false)
+            // {
+            //      _sectionInstance = Instantiate(sectionPrefab);
+            //     _isSpawned = true;    
+            // }
+            // else
+            // {
+            //     _sectionInstance.gameObject.SetActive(true);
+            // }
+            
+            _sectionInstance[randomIndex].transform.position = _spawnPosition.position;
             
             yield return _waitForSeconds;
         }

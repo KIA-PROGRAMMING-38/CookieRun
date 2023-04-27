@@ -4,8 +4,18 @@ using System.IO;
 using UnityEditor.Rendering;
 using UnityEngine;
 
+public enum SectionType
+{
+    Easy,
+    Normal,
+    TypeCount
+}
+
 public static class DataManager
 {
+    private static Section[][] s_sections = new Section[(int)SectionType.TypeCount][];
+    public static Section[][] Sections => s_sections;
+
     private static List<Jelly> s_jellies;
     public static List<Jelly> Jellies => s_jellies;
 
@@ -16,16 +26,16 @@ public static class DataManager
     {
         Init();
     }
-
+    
     public static void Init()
     {
-        TextAsset jellyCsvFile = LoadFile<TextAsset>("Jelly");
-        s_jellies = CsvParser.Parse<Jelly>(jellyCsvFile);
+        Section[] sections = Resources.LoadAll<Section>("Sections/Easy");
+        Section[] normalSections = Resources.LoadAll<Section>("Sections/Normal");
 
-        TextAsset enemyCsvFile = LoadFile<TextAsset>("Enemy");
-        s_enemies = CsvParser.Parse<Obstacle>(enemyCsvFile);
+        s_sections[(int)SectionType.Easy] = sections;
+        s_sections[(int)SectionType.Normal] = normalSections;
     }
-    
+
     const string DATA_FILE_ROOT_DIRECTORY = "Data";
     private static T LoadFile<T>(string filename) where T : UnityEngine.Object
     {
