@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class JellyController : MonoBehaviour
 {
-    private Jelly _jellyData;
+    [SerializeField] private Jelly _jellyData;
 
     private SpriteRenderer _spriteRenderer;
     private CircleCollider2D _circleCollider;
@@ -14,6 +15,9 @@ public class JellyController : MonoBehaviour
     
     private void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _circleCollider = GetComponent<CircleCollider2D>();
+        
         _initialPosition = transform.localPosition;
     }
 
@@ -22,20 +26,9 @@ public class JellyController : MonoBehaviour
         transform.localPosition = _initialPosition;
     }
 
-    public void Activate(JellyKind jellyKind)
+    private void Start()
     {
-        _jellyData = DataManager.Jellies[(int)jellyKind];
-        BindData();
-    }
-
-    private void BindData()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _circleCollider = GetComponent<CircleCollider2D>();
-        
-        string spriteName = $"jelly_{_jellyData.SpriteName}";
-        
-        _spriteRenderer.sprite = DataManager.LoadJellySprite(spriteName);
+        _spriteRenderer.sprite = _jellyData.Sprite;
         
         ResizeCollider();
     }

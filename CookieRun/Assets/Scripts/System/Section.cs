@@ -11,19 +11,32 @@ public class Section : MonoBehaviour
     private RootJellyBean _rootJellybean;
     private RootBearPink _rootBearPink;
     
+    
     private IObjectPool<Section> _managedPool;
+
+    public GameObject jellyBean;
+    public GameObject bearBig;
+    
 
     private void OnEnable()
     {
         SetActiveRecursively(gameObject.transform, true);
+
+
         
         _rootJellybean = GetComponentInChildren<RootJellyBean>();
         _rootBearPink = GetComponentInChildren<RootBearPink>();
 
-        ActivateJellyChildren(_rootJellybean.gameObject.transform, JellyKind.JellyBean);
-        ActivateJellyChildren(_rootBearPink.gameObject.transform, JellyKind.BearPink);
+        if (_rootJellybean != null)
+        {
+        }
+        
+        if (_rootBearPink != null)
+        {
+        }
+        
     }
-    
+
     public void SetActiveRecursively(Transform parent, bool active)
     {
         parent.gameObject.SetActive(active);
@@ -34,12 +47,12 @@ public class Section : MonoBehaviour
         }
     }
 
-    private void ActivateJellyChildren(Transform root, JellyKind jellyKind)
+    private void ActivateChildren(Transform root)
     {
         foreach (Transform child in root)
         {
             JellyController jellyController = child.GetComponent<JellyController>();
-            jellyController.Activate(jellyKind);
+            
         }
     }
 

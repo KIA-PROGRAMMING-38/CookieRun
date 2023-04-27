@@ -9,8 +9,8 @@ public static class DataManager
     private static List<Jelly> s_jellies;
     public static List<Jelly> Jellies => s_jellies;
 
-    private static List<Enemy> s_enemies;
-    public static List<Enemy> Enemies => s_enemies;
+    private static List<Obstacle> s_enemies;
+    public static List<Obstacle> Enemies => s_enemies;
 
     static DataManager()
     {
@@ -23,7 +23,7 @@ public static class DataManager
         s_jellies = CsvParser.Parse<Jelly>(jellyCsvFile);
 
         TextAsset enemyCsvFile = LoadFile<TextAsset>("Enemy");
-        s_enemies = CsvParser.Parse<Enemy>(enemyCsvFile);
+        s_enemies = CsvParser.Parse<Obstacle>(enemyCsvFile);
     }
     
     const string DATA_FILE_ROOT_DIRECTORY = "Data";
