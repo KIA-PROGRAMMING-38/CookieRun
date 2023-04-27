@@ -21,6 +21,8 @@ public class SpawnManager : MonoBehaviour
     private WaitForSeconds _waitForSeconds;
     private IEnumerator _spawnCoroutine;
 
+    
+
     enum SectionSet
     {
         Default = 0,
@@ -30,15 +32,39 @@ public class SpawnManager : MonoBehaviour
 
     private SectionSet _section;
     
+    private List<Section> _sections = new List<Section>();
+
+    private void Awake()
+    {
+        Section[] sectionComponents = GetComponentsInChildren<Section>();
+        foreach (Section sectionComponent in sectionComponents)
+        {
+            _sections.Add(sectionComponent);
+            sectionComponent.gameObject.SetActive(false);
+        }
+    }
+
     private void Start()
     {
         _section = SectionSet.Default;
         _normalSectionIndex = normalSectionStartIndex;
-        
-        _spawnCoroutine = SpawnCoroutineHelper();
+
+        _spawnCoroutine = SpawnSection();
         _waitForSeconds = new WaitForSeconds(_spawnCoolTime);
         
         StartCoroutine(_spawnCoroutine);
+    }
+
+    IEnumerator SpawnSection()
+    {
+        while (true)
+        {
+            _sectionIndex = GetSectionIndex();
+            _sections[_sectionIndex].gameObject.SetActive(true);
+            Debug.Log($"현재 섹션 : {_sections[_sectionIndex]}");
+            
+            yield return _waitForSeconds;
+        }
     }
 
     private IEnumerator SpawnCoroutineHelper()

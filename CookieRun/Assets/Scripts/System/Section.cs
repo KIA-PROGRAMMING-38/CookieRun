@@ -8,34 +8,12 @@ using UnityEngine.Pool;
 
 public class Section : MonoBehaviour
 {
-    private RootJellyBean _rootJellybean;
-    private RootBearPink _rootBearPink;
-    
-    
     private IObjectPool<Section> _managedPool;
-
-    public GameObject jellyBean;
-    public GameObject bearBig;
     
-
-    private void OnEnable()
-    {
-        SetActiveRecursively(gameObject.transform, true);
-
-
-        
-        _rootJellybean = GetComponentInChildren<RootJellyBean>();
-        _rootBearPink = GetComponentInChildren<RootBearPink>();
-
-        if (_rootJellybean != null)
-        {
-        }
-        
-        if (_rootBearPink != null)
-        {
-        }
-        
-    }
+    // private void OnEnable()
+    // {
+    //     SetActiveRecursively(gameObject.transform, true);
+    // }
 
     public void SetActiveRecursively(Transform parent, bool active)
     {
@@ -56,22 +34,22 @@ public class Section : MonoBehaviour
         }
     }
 
-    public void SetManagedPool(IObjectPool<Section> pool)
-    {
-        _managedPool = pool;
-    }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("LeftBound"))
-        {
-            DestroySection();
-        }
-    }
-
-    // LeftBound에 충돌하면 호출할 메소드
-    public void DestroySection()
-    {
-        _managedPool.Release(this);
-    }
+    // public void SetManagedPool(IObjectPool<Section> pool)
+    // {
+    //     _managedPool = pool;
+    // }
+    //
+    // private void OnTriggerEnter2D(Collider2D col)
+    // {
+    //     if (col.CompareTag("LeftBound"))
+    //     {
+    //         DestroySection();
+    //     }
+    // }
+    //
+    // // LeftBound에 충돌하면 호출할 메소드
+    // public void DestroySection()
+    // {
+    //     _managedPool.Release(this);
+    // }
 }
