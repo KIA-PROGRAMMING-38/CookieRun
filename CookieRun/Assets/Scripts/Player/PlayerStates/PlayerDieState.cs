@@ -14,6 +14,6 @@ public class PlayerDieState : StateMachineBehaviour
         _spriteRenderer.color = _originalColor;
         
         // GameOver
-        GameManager.gameOver = true;
+        GameManager.GameOver = true;
     }
 }

@@ -53,6 +53,14 @@ public class SpawnManager : MonoBehaviour
         _waitForSeconds = new WaitForSeconds(_spawnCoolTime);
         
         StartCoroutine(_spawnCoroutine);
+        
+        GameManager.OnGameEnd -= StopSpawnSection;
+        GameManager.OnGameEnd += StopSpawnSection;
+    }
+    
+    private void StopSpawnSection()
+    {
+        StopCoroutine(_spawnCoroutine);
     }
 
     IEnumerator SpawnSection()
@@ -67,19 +75,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private IEnumerator SpawnCoroutineHelper()
-    {
-        while (!GameManager.gameOver)
-        {
-            _sectionIndex = GetSectionIndex();
-            
-            Section section = _sectionPools[_sectionIndex].SpawnSection();
-            section.transform.position = _spawnPosition.position;
-            
-            Debug.Log($"{_sectionIndex}번째 {_sectionPools[_sectionIndex].name} 실행됨");
-            yield return _waitForSeconds;
-        }
-    }
+    
 
     private int GetSectionIndex()
     {

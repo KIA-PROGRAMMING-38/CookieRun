@@ -11,7 +11,7 @@ public class MoveLeft : MonoBehaviour
 
     void Update()
     {
-        if (!GameManager.gameOver)
+        if (!GameManager.GameOver)
         {
             transform.Translate(_moveleft * Time.deltaTime * moveLeftSpeed * GameManager.GameSpeed);
         }
