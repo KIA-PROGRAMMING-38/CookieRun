@@ -44,21 +44,21 @@ public class SpawnManager : MonoBehaviour
     {
         while (true)
         {
-            int sectionIndex = GetSectionType();
+            GetSection();
 
-            Section sectionPrefab = DataManager.Sections[_sectionType][sectionIndex];
+            Section sectionPrefab = DataManager.Sections[_sectionType][_sectionIndex];
 
-            if (_sectionInstance[_sectionType][sectionIndex] == null)
+            if (_sectionInstance[_sectionType][_sectionIndex] == null)
             {
-                _sectionInstance[_sectionType][sectionIndex] = Instantiate(sectionPrefab);
+                _sectionInstance[_sectionType][_sectionIndex] = Instantiate(sectionPrefab);
             }
 
             else
             {
-                _sectionInstance[_sectionType][sectionIndex].Activate();
+                _sectionInstance[_sectionType][_sectionIndex].Activate();
             }
 
-            _sectionInstance[_sectionType][sectionIndex].transform.position = _spawnPosition.position;
+            _sectionInstance[_sectionType][_sectionIndex].transform.position = _spawnPosition.position;
             
             yield return _waitForSeconds;
         }
@@ -69,28 +69,28 @@ public class SpawnManager : MonoBehaviour
     private int _easyIndex;
     private int _normalIndex;
     // Easy,Normal중에서 Get해야 한다.
-    private int GetSectionType()
+
+    private int _sectionIndex;
+    private void GetSection()
     {
         if (_isNormal == false)
         {
             _isNormal = true;
             _sectionType = (int)SectionType.Easy;
-            _easyIndex = Random.Range(0, DataManager.Sections[(int)SectionType.Easy].Length);
-            
-            return _easyIndex;
+            _sectionIndex = Random.Range(0, DataManager.Sections[(int)SectionType.Easy].Length);
+
+            return;
         }
 
-        int toRet = _normalIndex;
+        _sectionIndex = _normalIndex;
 
         ++_normalIndex;
         _sectionType = (int)SectionType.Normal;
         
-        if (toRet == _normalSectionsMaxCount - 1)
+        if (_sectionIndex == _normalSectionsMaxCount - 1)
         {
             _isNormal = false;
             _normalIndex = 0;
         }
-
-        return toRet;
     }
 }
