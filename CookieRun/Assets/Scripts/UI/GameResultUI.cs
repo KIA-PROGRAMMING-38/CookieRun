@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class GameResultUI : MonoBehaviour
 {
     [SerializeField] private float _waitSeconds = 3f;
-    private Image _image;
+    private Transform _backgroundUI;
+    
     private IEnumerator _showUICoroutine;
     private WaitForSeconds _waitForSeconds;
     
@@ -15,34 +16,44 @@ public class GameResultUI : MonoBehaviour
     {
         GameManager.OnGameEnd -= Ativate;
         GameManager.OnGameEnd += Ativate;
-        _image = GetComponentInChildren<Image>();
+        _backgroundUI = transform.GetChild(0);
         _waitForSeconds = new WaitForSeconds(_waitSeconds);
-    }
-
-    private void Start()
-    {
-        _image.enabled = false;
+        
         gameObject.SetActive(false);
     }
 
-    private void OnEnable()
-    {
-        if (_showUICoroutine != null)
-        {
-            StopCoroutine(_showUICoroutine);
-        }
-
-        _showUICoroutine = ShowUI();
-        StartCoroutine(_showUICoroutine);
-    }
-
-    IEnumerator ShowUI()
+    private IEnumerator Start()
     {
         yield return _waitForSeconds;
-        _image.enabled = true;
+        
+        int childCount = transform.childCount;
+        for (int i = 0; i < childCount; ++i)
+        {
+            Transform child = transform.GetChild(i);
+            child.gameObject.SetActive(true);
+        }
     }
+    
     private void Ativate()
     {
         gameObject.SetActive(true);
     }
+
+    // private void OnEnable()
+    // {
+    //     if (_showUICoroutine != null)
+    //     {
+    //         StopCoroutine(_showUICoroutine);
+    //     }
+    //
+    //     _showUICoroutine = ShowUI();
+    //     StartCoroutine(_showUICoroutine);
+    // }
+    //
+    // IEnumerator ShowUI()
+    // {
+    //     yield return _waitForSeconds;
+    //     //_image.enabled = true;
+    // }
+    
 }
