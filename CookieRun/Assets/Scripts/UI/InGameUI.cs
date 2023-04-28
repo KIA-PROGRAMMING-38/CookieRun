@@ -3,7 +3,7 @@ using UnityEngine;
 using Model;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class InGameUI : MonoBehaviour
 {
     [SerializeField] private Image _hpbar;
     private float _nomalizeCurrentHp;
