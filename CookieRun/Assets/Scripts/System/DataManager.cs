@@ -4,22 +4,38 @@ using System.IO;
 using UnityEditor.Rendering;
 using UnityEngine;
 
+public enum SectionType
+{
+    Easy,
+    Normal,
+    TypeCount
+}
+
 public static class DataManager
 {
+    private static Section[][] s_sections = new Section[(int)SectionType.TypeCount][];
+    public static Section[][] Sections => s_sections;
+
     private static List<Jelly> s_jellies;
     public static List<Jelly> Jellies => s_jellies;
+
+    private static List<Obstacle> s_enemies;
+    public static List<Obstacle> Enemies => s_enemies;
 
     static DataManager()
     {
         Init();
     }
-
+    
     public static void Init()
     {
-        TextAsset jellyCsvFile = LoadFile<TextAsset>("Jelly");
-        s_jellies = CsvParser.Parse<Jelly>(jellyCsvFile);
+        Section[] easySections = Resources.LoadAll<Section>("Sections/Easy");
+        Section[] normalSections = Resources.LoadAll<Section>("Sections/Normal");
+
+        s_sections[(int)SectionType.Easy] = easySections;
+        s_sections[(int)SectionType.Normal] = normalSections;
     }
-    
+
     const string DATA_FILE_ROOT_DIRECTORY = "Data";
     private static T LoadFile<T>(string filename) where T : UnityEngine.Object
     {
@@ -30,11 +46,26 @@ public static class DataManager
     
     const string SPRITE_FILE_ROOT_DIRECTORY = "Sprites";
     const string JELLY_DIRECTORY = "Jelly";
-    public static Sprite LoadSprite(string filename)
+    public static Sprite LoadJellySprite(string filename)
     {
         string filePath = Path.Combine(SPRITE_FILE_ROOT_DIRECTORY, JELLY_DIRECTORY, filename);
-
-        Debug.Log(Resources.Load<Sprite>(filePath));
+        
         return Resources.Load<Sprite>(filePath);
+    }
+
+    private const string ENEMY_DIRECTORY = "Enemy";
+    public static Sprite LoadEnemySprite(string filename)
+    {
+        string filePath = Path.Combine(SPRITE_FILE_ROOT_DIRECTORY, ENEMY_DIRECTORY, filename);
+        return Resources.Load<Sprite>(filePath);
+    }
+
+    private const string ANIMATOR_FILE_ROOT_DIRECTORY = "AnimatorOverride";
+    public static RuntimeAnimatorController LoadAnimatorController(string filename)
+    {
+        string filePath = Path.Combine(ANIMATOR_FILE_ROOT_DIRECTORY, ENEMY_DIRECTORY, filename);
+        filePath = filePath.Replace("\r", "");
+        
+        return Resources.Load<RuntimeAnimatorController>(filePath);
     }
 }

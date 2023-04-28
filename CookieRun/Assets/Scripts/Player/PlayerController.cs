@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         _deltaTime = Time.deltaTime;
         
-        if (!PlayerData.isInvincible && !GameManager.gameOver)
+        if (!PlayerData.isInvincible && !GameManager.GameOver)
         {
             CookieUIModel.Hp -= _deltaTime;
         }

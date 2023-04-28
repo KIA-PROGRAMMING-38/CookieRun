@@ -24,7 +24,7 @@ public class LightSpeedItem : MonoBehaviour
             _playerController.ActivateDashEffect(true);
             _playerData.isLightSpeed = true;
             // GameSpeed를 2배로 올린다.
-            GameManager.GameSpeed *= _lightSpeed;
+            GameManager.GameSpeed = _lightSpeed;
         }
         
         

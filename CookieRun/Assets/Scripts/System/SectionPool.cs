@@ -32,7 +32,7 @@ public class SectionPool : MonoBehaviour
     private Section CreateSection()
     {
         Section section = Instantiate(sectionPrefab).GetComponent<Section>();
-        section.SetManagedPool(_pool);
+        //section.SetManagedPool(_pool);
         return section;
     }
 

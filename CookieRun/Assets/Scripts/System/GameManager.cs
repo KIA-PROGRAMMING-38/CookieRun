@@ -6,16 +6,31 @@ using Model;
 
 public class GameManager : MonoBehaviour
 {
-    public static bool gameOver;
+    public static event Action OnGameEnd;
+
+    private static bool _gameOver;
+    public static bool GameOver
+    {
+        get => _gameOver;
+
+        set
+        {
+            _gameOver = value;
+            if (value == true)
+            {
+                OnGameEnd?.Invoke();
+            }
+        }
+    }
     // private static float _score;
     private float _elapsedTime;
 
     private void Awake()
     {
-        gameOver = false;
+        GameOver = false;
         GameSpeed = 1f;
     }
-    
+
 
     // 점수를 추가하는 메소드
     public static void UpdateScore(float scoreToAdd)

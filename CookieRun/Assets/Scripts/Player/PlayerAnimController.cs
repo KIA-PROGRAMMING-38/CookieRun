@@ -11,7 +11,6 @@ public class PlayerAnimController : MonoBehaviour
     private Animator _animator;
     private PlayerData _playerData;
     private PlayerController _playerController;
-    public GameObject explosionAnimation;
     private IEnumerator _nomalInvicible;
 
     private void Awake()
@@ -48,7 +47,7 @@ public class PlayerAnimController : MonoBehaviour
         // 무적상태이면 Hurt로 들어가면 안된다.
         if (col.CompareTag("Enemy") && !PlayerData.isInvincible)
         {
-            if (!GameManager.gameOver)
+            if (!GameManager.GameOver)
             {
                 _animator.SetTrigger(PlayerAnimID.IS_HURT);
                 _playerData.isHurt = true;

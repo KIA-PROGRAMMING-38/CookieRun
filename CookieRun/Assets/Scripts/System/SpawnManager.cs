@@ -2,95 +2,95 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private SectionPool[] _sectionPools;
     [SerializeField] private Transform _spawnPosition;
-    [SerializeField] private float _spawnCoolTime = 3f;
+    [SerializeField] private float _spawnCoolTime = 4f;
     
-    private int _firstIndex = 0;
-    private int _lastIndexOfEasySection = 2;
-    private int normalSectionStartIndex = 3;
-    private int _normalSectionIndex;
-    private int _sectionIndex;
-    private int _previousIndex;
     
     private WaitForSeconds _waitForSeconds;
     private IEnumerator _spawnCoroutine;
 
-    enum SectionSet
-    {
-        Default = 0,
-        EasySection,
-        NomalSection
-    }
-
-    private SectionSet _section;
-    
     private void Start()
     {
-        _section = SectionSet.Default;
-        _normalSectionIndex = normalSectionStartIndex;
-        
-        _spawnCoroutine = SpawnCoroutineHelper();
+        _spawnCoroutine = SpawnSection(); 
         _waitForSeconds = new WaitForSeconds(_spawnCoolTime);
+
+        // Instantiate한 Section을 담기 위한 배열
+        _sectionInstance = new Section[(int)SectionType.TypeCount][];
+        _sectionInstance[(int)SectionType.Easy] = new Section[DataManager.Sections[(int)SectionType.Easy].Length];
+        _sectionInstance[(int)SectionType.Normal] = new Section[DataManager.Sections[(int)SectionType.Normal].Length];
+        _normalSectionsMaxCount = DataManager.Sections[(int)SectionType.Normal].Length;
         
         StartCoroutine(_spawnCoroutine);
+        
+        GameManager.OnGameEnd -= StopSpawnSection;
+        GameManager.OnGameEnd += StopSpawnSection;
+    }
+    
+    private void StopSpawnSection()
+    {
+        StopCoroutine(_spawnCoroutine);
     }
 
-    private IEnumerator SpawnCoroutineHelper()
+    private Section[][] _sectionInstance;
+    
+    private int _sectionType;
+    IEnumerator SpawnSection()
     {
-        while (!GameManager.gameOver)
+        while (true)
         {
-            _sectionIndex = GetSectionIndex();
+            GetSection();
+
+            Section sectionPrefab = DataManager.Sections[_sectionType][_sectionIndex];
+
+            if (_sectionInstance[_sectionType][_sectionIndex] == null)
+            {
+                _sectionInstance[_sectionType][_sectionIndex] = Instantiate(sectionPrefab);
+            }
+
+            else
+            {
+                _sectionInstance[_sectionType][_sectionIndex].Activate();
+            }
+
+            _sectionInstance[_sectionType][_sectionIndex].transform.position = _spawnPosition.position;
             
-            Section section = _sectionPools[_sectionIndex].SpawnSection();
-            section.transform.position = _spawnPosition.position;
-            
-            Debug.Log($"{_sectionIndex}번째 {_sectionPools[_sectionIndex].name} 실행됨");
             yield return _waitForSeconds;
         }
     }
+    
+    private int _normalSectionsMaxCount;
+    private bool _isNormal = false;
+    private int _easyIndex;
+    private int _normalIndex;
+    // Easy,Normal중에서 Get해야 한다.
 
-    private int GetSectionIndex()
+    private int _sectionIndex;
+    private void GetSection()
     {
-        // EasySection을 뽑는다.
-        if (_section == SectionSet.Default)
+        if (_isNormal == false)
         {
-            _sectionIndex = Random.Range(_firstIndex, _lastIndexOfEasySection + 1);
-                
-            while (_sectionIndex == _previousIndex)
-            {
-                _sectionIndex = Random.Range(_firstIndex, _lastIndexOfEasySection + 1);    
-            }
+            _isNormal = true;
+            _sectionType = (int)SectionType.Easy;
+            _sectionIndex = Random.Range(0, DataManager.Sections[(int)SectionType.Easy].Length);
 
-            _previousIndex = _sectionIndex;
-                
-            _section = SectionSet.EasySection;
+            return;
         }
 
-        // normalSection을 차례대로 실행한다.
-        else
+        _sectionIndex = _normalIndex;
+
+        ++_normalIndex;
+        _sectionType = (int)SectionType.Normal;
+        
+        if (_sectionIndex == _normalSectionsMaxCount - 1)
         {
-            _sectionIndex = _normalSectionIndex;
-            ++_normalSectionIndex;
-
-            // 순서대로 다 실행했다면 normalSectionIndex를 초기화 시키고 다시 EasySection을 뽑을 수 있게 section을 설정한다.
-            if (_normalSectionIndex >= _sectionPools.Length)
-            {
-                _normalSectionIndex = normalSectionStartIndex;
-                _section = SectionSet.Default;
-            }
-                
-            else
-            {
-                _section = SectionSet.NomalSection;
-            }
+            _isNormal = false;
+            _normalIndex = 0;
         }
-
-        return _sectionIndex;
     }
 }
