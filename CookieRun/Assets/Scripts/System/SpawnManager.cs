@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private SectionPool[] _sectionPools;
     [SerializeField] private Transform _spawnPosition;
     [SerializeField] private float _spawnCoolTime = 4f;
     
@@ -16,13 +15,8 @@ public class SpawnManager : MonoBehaviour
     private WaitForSeconds _waitForSeconds;
     private IEnumerator _spawnCoroutine;
 
-    
-
     private void Start()
     {
-        _sectionSet = SectionSet.Default;
-        _normalSectionIndex = normalSectionStartIndex;
-
         _spawnCoroutine = SpawnSection(); 
         _waitForSeconds = new WaitForSeconds(_spawnCoolTime);
 
@@ -44,112 +38,59 @@ public class SpawnManager : MonoBehaviour
     }
 
     private Section[][] _sectionInstance;
-    private int _easyIndex = (int)SectionType.Easy;
-    private int _normalIndex = (int)SectionType.Normal;
+    
     private int _sectionType;
     IEnumerator SpawnSection()
     {
         while (true)
         {
-            _sectionType = GetSectionType();
-            int randomIndex = Random.Range(0, 2);
-            Section sectionPrefab = DataManager.Sections[_sectionType][randomIndex];
+            int sectionIndex = GetSectionType();
 
-            if (_sectionInstance[_sectionType][randomIndex] == null)
+            Section sectionPrefab = DataManager.Sections[_sectionType][sectionIndex];
+
+            if (_sectionInstance[_sectionType][sectionIndex] == null)
             {
-                _sectionInstance[_sectionType][randomIndex] = Instantiate(sectionPrefab);
+                _sectionInstance[_sectionType][sectionIndex] = Instantiate(sectionPrefab);
             }
 
             else
             {
-                _sectionInstance[_sectionType][randomIndex].Activate();
+                _sectionInstance[_sectionType][sectionIndex].Activate();
             }
 
-            _sectionInstance[_sectionType][randomIndex].transform.position = _spawnPosition.position;
+            _sectionInstance[_sectionType][sectionIndex].transform.position = _spawnPosition.position;
             
             yield return _waitForSeconds;
         }
     }
-
-    enum SectionSet
-    {
-        Default = 0,
-        Easy,
-        Normal
-    }
-
-    private SectionSet _sectionSet;
-    int normalCount = 0;
     
-    private int _sectionIndex;
-    private int _firstIndex = 0;
-    private int _lastIndexOfEasySection = 2;
-    private int normalSectionStartIndex = 3;
-    private int _normalSectionIndex;
-    private int _previousIndex;
     private int _normalSectionsMaxCount;
-
+    private bool _isNormal = false;
+    private int _easyIndex;
+    private int _normalIndex;
     // Easy,Normal중에서 Get해야 한다.
     private int GetSectionType()
     {
-        int sectionType;
+        if (_isNormal == false)
+        {
+            _isNormal = true;
+            _sectionType = (int)SectionType.Easy;
+            _easyIndex = Random.Range(0, DataManager.Sections[(int)SectionType.Easy].Length);
+            
+            return _easyIndex;
+        }
+
+        int toRet = _normalIndex;
+
+        ++_normalIndex;
+        _sectionType = (int)SectionType.Normal;
         
-        
-        if (_sectionSet == SectionSet.Default)
+        if (toRet == _normalSectionsMaxCount - 1)
         {
-            sectionType = _easyIndex;
-            _sectionSet = SectionSet.Easy;
+            _isNormal = false;
+            _normalIndex = 0;
         }
 
-        else
-        {
-            ++normalCount;
-            sectionType = _normalIndex;
-            if (normalCount == _normalSectionsMaxCount)
-            {
-                normalCount = 0;
-                _sectionSet = SectionSet.Default;    
-            }
-        }
-
-        return sectionType;
-    }
-    private int GetRandomIndex()
-    {
-        // EasySection을 뽑는다.
-        if (_sectionSet == SectionSet.Default)
-        {
-            _sectionIndex = Random.Range(_firstIndex, _lastIndexOfEasySection + 1);
-                
-            while (_sectionIndex == _previousIndex)
-            {
-                _sectionIndex = Random.Range(_firstIndex, _lastIndexOfEasySection + 1);    
-            }
-
-            _previousIndex = _sectionIndex;
-                
-            _sectionSet = SectionSet.Easy;
-        }
-
-        // normalSection을 차례대로 실행한다.
-        else
-        {
-            _sectionIndex = _normalSectionIndex;
-            ++_normalSectionIndex;
-
-            // 순서대로 다 실행했다면 normalSectionIndex를 초기화 시키고 다시 EasySection을 뽑을 수 있게 section을 설정한다.
-            if (_normalSectionIndex >= _sectionPools.Length)
-            {
-                _normalSectionIndex = normalSectionStartIndex;
-                _sectionSet = SectionSet.Default;
-            }
-                
-            else
-            {
-                _sectionSet = SectionSet.Normal;
-            }
-        }
-
-        return _sectionIndex;
+        return toRet;
     }
 }
