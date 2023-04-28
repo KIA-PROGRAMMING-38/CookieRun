@@ -7,16 +7,15 @@ using UnityEngine.UI;
 public class GameResultUI : MonoBehaviour
 {
     [SerializeField] private float _waitSeconds = 3f;
-    private Transform _backgroundUI;
-    
+
     private IEnumerator _showUICoroutine;
     private WaitForSeconds _waitForSeconds;
-    
+
     private void Awake()
     {
         GameManager.OnGameEnd -= Ativate;
         GameManager.OnGameEnd += Ativate;
-        _backgroundUI = transform.GetChild(0);
+        
         _waitForSeconds = new WaitForSeconds(_waitSeconds);
         
         gameObject.SetActive(false);
@@ -38,22 +37,4 @@ public class GameResultUI : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
-
-    // private void OnEnable()
-    // {
-    //     if (_showUICoroutine != null)
-    //     {
-    //         StopCoroutine(_showUICoroutine);
-    //     }
-    //
-    //     _showUICoroutine = ShowUI();
-    //     StartCoroutine(_showUICoroutine);
-    // }
-    //
-    // IEnumerator ShowUI()
-    // {
-    //     yield return _waitForSeconds;
-    //     //_image.enabled = true;
-    // }
-    
 }
