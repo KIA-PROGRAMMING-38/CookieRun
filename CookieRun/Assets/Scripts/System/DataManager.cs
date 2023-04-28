@@ -29,10 +29,10 @@ public static class DataManager
     
     public static void Init()
     {
-        Section[] sections = Resources.LoadAll<Section>("Sections/Easy");
+        Section[] easySections = Resources.LoadAll<Section>("Sections/Easy");
         Section[] normalSections = Resources.LoadAll<Section>("Sections/Normal");
 
-        s_sections[(int)SectionType.Easy] = sections;
+        s_sections[(int)SectionType.Easy] = easySections;
         s_sections[(int)SectionType.Normal] = normalSections;
     }
 

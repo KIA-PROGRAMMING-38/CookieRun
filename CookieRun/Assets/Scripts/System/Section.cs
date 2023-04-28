@@ -1,23 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using UnityEngine;
-using UnityEngine.iOS;
-using UnityEngine.Pool;
 
 public class Section : MonoBehaviour
 {
-    private IObjectPool<Section> _managedPool;
 
-    private void OnEnable()
-    {
-        Activate();
-    }
+    // private void OnEnable()
+    // {
+    //     Activate();
+    // }
 
     public void Activate()
     {
         gameObject.SetActive(true);
+        
         int childCount = transform.childCount;
         for (int i = 0; i < childCount; ++i)
         {
@@ -25,12 +19,7 @@ public class Section : MonoBehaviour
             child.gameObject.SetActive(true);
         }
     }
-
-    // public void SetManagedPool(IObjectPool<Section> pool)
-    // {
-    //     _managedPool = pool;
-    // }
-    //
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("LeftBound"))
@@ -38,10 +27,4 @@ public class Section : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    //
-    // // LeftBound에 충돌하면 호출할 메소드
-    // public void DestroySection()
-    // {
-    //     _managedPool.Release(this);
-    // }
 }
