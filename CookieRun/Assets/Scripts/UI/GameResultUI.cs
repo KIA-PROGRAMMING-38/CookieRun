@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameResultUI : MonoBehaviour
@@ -37,4 +38,8 @@ public class GameResultUI : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
+
+    public void RestartScene() => SceneManager.LoadScene(0);
+
+
 }
