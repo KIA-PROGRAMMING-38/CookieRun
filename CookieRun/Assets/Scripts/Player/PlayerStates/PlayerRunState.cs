@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Model;
 using PlayerAnimationID;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ public class PlayerRunState : StateMachineBehaviour
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             animator.SetBool(PlayerAnimID.IS_JUMPING, true);
         }
@@ -26,6 +27,11 @@ public class PlayerRunState : StateMachineBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             animator.SetBool(PlayerAnimID.IS_SLIDE, true);
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            CookieUIModel.Hp = 0;
         }
     }
 }

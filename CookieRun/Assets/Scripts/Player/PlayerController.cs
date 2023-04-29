@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerData _playerData;
     private SpriteRenderer _spriteRenderer;
     private PlayerAnimController _playerAnimController;
+    private Rigidbody2D _rigid;
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
     private WaitForSeconds _escapeInvincibleTime;
@@ -26,14 +27,23 @@ public class PlayerController : MonoBehaviour
         _playerData = GetComponent<PlayerData>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _playerAnimController = GetComponent<PlayerAnimController>();
+        _rigid = GetComponent<Rigidbody2D>();
 
+        
         // 중력 적용
-        Physics2D.gravity *= _playerData.gravityModifier;
-
+        _rigid.gravityScale *= _playerData.gravityModifier;
+        
         _escapeInvincibleTime = new WaitForSeconds(3f);
+        
+        GameManager.SetGameStartUIModel -= UIModelInitialize;
+        GameManager.SetGameStartUIModel += UIModelInitialize;
+    }
 
+    private void UIModelInitialize()
+    {
         CookieUIModel.MaxHp = _playerData.maxHp;
         CookieUIModel.Hp = _playerData.maxHp;
+        CookieUIModel.Score = 0;
     }
 
     private void Update()

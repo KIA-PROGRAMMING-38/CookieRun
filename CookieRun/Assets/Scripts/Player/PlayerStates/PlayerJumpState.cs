@@ -15,6 +15,7 @@ public class PlayerJumpState : StateMachineBehaviour
         _playerData = animator.GetComponent<PlayerData>();
         _playerData.jumping = true;
         // Jump
+        
         _rigidbody.AddForce(_up * _playerData.jumpForce, ForceMode2D.Impulse);
     }
     
