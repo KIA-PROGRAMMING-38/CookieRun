@@ -68,4 +68,12 @@ public static class DataManager
         
         return Resources.Load<RuntimeAnimatorController>(filePath);
     }
+
+    private const string SOUND_FILE_ROOT_DIRECTORY = "Sound";
+    public static AudioClip LoadAudioClip(string filename)
+    {
+        string filePath = Path.Combine(SOUND_FILE_ROOT_DIRECTORY, filename);
+
+        return Resources.Load<AudioClip>(filePath);
+    }
 }
