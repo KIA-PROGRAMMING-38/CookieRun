@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
             _gameOver = value;
             if (value == true)
             {
-                Debug.Log($"GAMEOVER VALUE : {value}");
                 OnGameEnd?.Invoke();
             }
         }
@@ -36,7 +35,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SetGameStartUIModel?.Invoke();
-        
     }
 
 
