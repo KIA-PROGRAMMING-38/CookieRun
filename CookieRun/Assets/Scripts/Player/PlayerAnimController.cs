@@ -11,18 +11,13 @@ public class PlayerAnimController : MonoBehaviour
     private Animator _animator;
     private PlayerData _playerData;
     private PlayerController _playerController;
-    private IEnumerator _nomalInvicible;
+    private IEnumerator _normalInvicible;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _playerData = GetComponent<PlayerData>();
         _playerController = GetComponent<PlayerController>();
-    }
-
-    private void Start()
-    {
-        _nomalInvicible = _playerController.Invincible();
     }
 
     private void Update()
@@ -51,7 +46,15 @@ public class PlayerAnimController : MonoBehaviour
             {
                 _animator.SetTrigger(PlayerAnimID.IS_HURT);
                 _playerData.isHurt = true;
-                _playerController.SetActiveCoroutine(_nomalInvicible);
+
+
+                if (_normalInvicible != null)
+                {
+                    StopCoroutine(_normalInvicible);
+                }
+                
+                _normalInvicible = _playerController.Invincible();
+                _playerController.SetActiveCoroutine(_normalInvicible);
             }
         }
     }

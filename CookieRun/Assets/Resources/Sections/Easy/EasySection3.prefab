@@ -51,8 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2675c024ef5c949ddb8aec6bec98c3bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jellyBean: {fileID: 0}
-  bearBig: {fileID: 0}
 --- !u!114 &5146737815343588933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5712a09ad5b4200bb45a016a9d6e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveLeftSpeed: 7
+  moveLeftSpeed: 8
 --- !u!61 &2114392958
 BoxCollider2D:
   m_ObjectHideFlags: 0

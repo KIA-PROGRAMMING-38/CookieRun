@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameResultUI : MonoBehaviour
@@ -13,10 +15,12 @@ public class GameResultUI : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.OnGameEnd -= Ativate;
-        GameManager.OnGameEnd += Ativate;
+        GameManager.OnGameEnd -= Activate;
+        GameManager.OnGameEnd += Activate;
         
         _waitForSeconds = new WaitForSeconds(_waitSeconds);
+        
+        Debug.Log("hiiiiiii");
         
         gameObject.SetActive(false);
     }
@@ -33,8 +37,13 @@ public class GameResultUI : MonoBehaviour
         }
     }
     
-    private void Ativate()
+    private void Activate()
     {
         gameObject.SetActive(true);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameEnd -= Activate;
     }
 }

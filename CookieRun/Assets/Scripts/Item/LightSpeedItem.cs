@@ -26,8 +26,6 @@ public class LightSpeedItem : MonoBehaviour
             // GameSpeed를 2배로 올린다.
             GameManager.GameSpeed = _lightSpeed;
         }
-        
-        
 
         gameObject.SetActive(false);
     }

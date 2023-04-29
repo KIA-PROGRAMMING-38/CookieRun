@@ -1,16 +1,17 @@
 using System;
 using UnityEngine;
 using Model;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
     [SerializeField] private Image _hpbar;
-    private float _nomalizeCurrentHp;
+    private float _normalizeCurrentHp;
 
     [SerializeField] private Text _scoreText;
 
-    [SerializeField] private Image _HpEffect;
+    [SerializeField] private Image _hpEffect;
 
     [SerializeField] private RectTransform _leftPoint;
 
@@ -28,23 +29,29 @@ public class InGameUI : MonoBehaviour
         CookieUIModel.OnChangeScore += ShowScore;
 
         _effectLeft = _leftPoint.position;
-        _effectRight = _HpEffect.rectTransform.position;
+        _effectRight = _hpEffect.rectTransform.position;
     }
 
     private void ShowCurrentHp()
     {
         // 0에서 maxHp사이에서 Hp가 속하는 위치를 나타낸다.
-        _nomalizeCurrentHp = Mathf.InverseLerp(
+        _normalizeCurrentHp = Mathf.InverseLerp(
             0f, CookieUIModel.MaxHp, CookieUIModel.Hp);
         
-        _hpbar.fillAmount = _nomalizeCurrentHp;
+        _hpbar.fillAmount = _normalizeCurrentHp;
         
-        _HpEffect.rectTransform.position = Vector2.Lerp(_effectLeft,_effectRight, _nomalizeCurrentHp);
+        _hpEffect.rectTransform.position = Vector2.Lerp(_effectLeft,_effectRight, _normalizeCurrentHp);
 
     }
 
     private void ShowScore()
     {
         _scoreText.text = $"{CookieUIModel.Score : #,0}";
+    }
+    
+    private void OnDestroy()
+    {
+        CookieUIModel.OnChangeHp -= ShowCurrentHp;
+        CookieUIModel.OnChangeScore -= ShowScore;
     }
 }

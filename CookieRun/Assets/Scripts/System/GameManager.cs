@@ -7,6 +7,7 @@ using Model;
 public class GameManager : MonoBehaviour
 {
     public static event Action OnGameEnd;
+    public static event Action SetGameStartUIModel;
 
     private static bool _gameOver;
     public static bool GameOver
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
             _gameOver = value;
             if (value == true)
             {
+                Debug.Log($"GAMEOVER VALUE : {value}");
                 OnGameEnd?.Invoke();
             }
         }
@@ -29,6 +31,12 @@ public class GameManager : MonoBehaviour
     {
         GameOver = false;
         GameSpeed = 1f;
+    }
+
+    private void Start()
+    {
+        SetGameStartUIModel?.Invoke();
+        
     }
 
 

@@ -93,4 +93,9 @@ public class SpawnManager : MonoBehaviour
             _normalIndex = 0;
         }
     }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameEnd -= StopSpawnSection;
+    }
 }
