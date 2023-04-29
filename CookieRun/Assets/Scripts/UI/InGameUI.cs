@@ -47,4 +47,10 @@ public class InGameUI : MonoBehaviour
     {
         _scoreText.text = $"{CookieUIModel.Score : #,0}";
     }
+    
+    private void OnDestroy()
+    {
+        CookieUIModel.OnChangeHp -= ShowCurrentHp;
+        CookieUIModel.OnChangeScore -= ShowScore;
+    }
 }
