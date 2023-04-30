@@ -11,5 +11,7 @@ namespace Literal
         public static readonly string MAGNET = "Magnet";
         public static readonly string GET_HP = "GetHp";
         public static readonly string GET_Jelly = "GetJelly";
+        public static readonly string BUTTON_HIGHLIGHT = "ButtonHighlight";
+        public static readonly string BUTTON_CLICK = "ButtonClick";
     }
 }
