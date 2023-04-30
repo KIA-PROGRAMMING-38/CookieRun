@@ -24,6 +24,10 @@ public class PlayerAnimController : MonoBehaviour
     {
         JumpButton.OnClickJumpButton -= PerformJump;
         JumpButton.OnClickJumpButton += PerformJump;
+        SlideButton.SlideButtonDown -= StartSlide;
+        SlideButton.SlideButtonDown += StartSlide;
+        SlideButton.SlideButtonUp -= StopSlide;
+        SlideButton.SlideButtonUp += StopSlide;
     }
 
     private void Update()
@@ -90,8 +94,20 @@ public class PlayerAnimController : MonoBehaviour
         }
     }
 
+    void StartSlide()
+    {
+        _animator.SetBool(PlayerAnimID.IS_SLIDE, true);
+    }
+
+    void StopSlide()
+    {
+        _animator.SetBool(PlayerAnimID.IS_SLIDE, false);
+    }
+
     private void OnDestroy()
     {
         JumpButton.OnClickJumpButton -= PerformJump;
+        SlideButton.SlideButtonDown -= StartSlide;
+        SlideButton.SlideButtonUp -= StopSlide;
     }
 }
