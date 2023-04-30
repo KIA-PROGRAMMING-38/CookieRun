@@ -12,14 +12,16 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float _spawnCoolTime = 4f;
     
     
-    private WaitForSeconds _waitForSeconds;
+    private WaitForSeconds _defaultSpawnInterval;
+    private WaitForSeconds _lightSpeedSpawnInterval;
     private IEnumerator _spawnCoroutine;
 
     private void Start()
     {
         _spawnCoroutine = SpawnSection(); 
-        _waitForSeconds = new WaitForSeconds(_spawnCoolTime);
-
+        _defaultSpawnInterval = new WaitForSeconds(_spawnCoolTime);
+        _lightSpeedSpawnInterval = new WaitForSeconds(_spawnCoolTime / 2f);
+        
         // Instantiate한 Section을 담기 위한 배열
         _sectionInstance = new Section[(int)SectionType.TypeCount][];
         _sectionInstance[(int)SectionType.Easy] = new Section[DataManager.Sections[(int)SectionType.Easy].Length];
@@ -59,10 +61,25 @@ public class SpawnManager : MonoBehaviour
             }
 
             _sectionInstance[_sectionType][_sectionIndex].transform.position = _spawnPosition.position;
-            
-            yield return _waitForSeconds;
+
+            yield return SectionSpawnInterval();
         }
     }
+    
+    public WaitForSeconds SectionSpawnInterval()
+    {
+        if ( PlayerData.isLightSpeed )
+        {
+            // 광속질주인 상태
+            return _lightSpeedSpawnInterval;
+        }
+        else
+        {
+            // 광속질주가 아닌 상태
+            return _defaultSpawnInterval;
+        }
+    }
+    
     
     private int _normalSectionsMaxCount;
     private bool _isNormal = false;

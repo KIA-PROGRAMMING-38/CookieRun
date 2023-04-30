@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static event Action SetActiveLightSpeedFalse; 
+    
     private PlayerData _playerData;
     private SpriteRenderer _spriteRenderer;
     private PlayerAnimController _playerAnimController;
@@ -129,8 +131,8 @@ public class PlayerController : MonoBehaviour
         // dashEffect 비활성화
         ActivateDashEffect(false);
         
-        _playerData.isLightSpeed = false;
-        
+        PlayerData.isLightSpeed = false;
+
         PlayerData.isInvincible = false;
     }
 

@@ -9,6 +9,11 @@ public class MoveLeft : MonoBehaviour
     public float moveLeftSpeed;
     private Vector2 _moveleft = Vector2.left;
 
+    private void Start()
+    {
+        //GameManager.OnGameEnd -= 
+    }
+
     void Update()
     {
         if (!GameManager.GameOver)
@@ -16,4 +21,6 @@ public class MoveLeft : MonoBehaviour
             transform.Translate(_moveleft * Time.deltaTime * moveLeftSpeed * GameManager.GameSpeed);
         }
     }
+
+    // void StopMove() =>
 }

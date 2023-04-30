@@ -6,6 +6,8 @@ using UnityEngine.Serialization;
 
 public class LightSpeedItem : MonoBehaviour
 {
+    public static event Action SetAcitveLightSpeedTimeTrue;
+    
     [SerializeField] private float _lightSpeed = 2f;
     private PlayerController _playerController;
     private PlayerData _playerData;
@@ -22,7 +24,8 @@ public class LightSpeedItem : MonoBehaviour
         {
             _playerController.SetActiveCoroutine(_lightSpeedCoroutine);
             _playerController.ActivateDashEffect(true);
-            _playerData.isLightSpeed = true;
+            PlayerData.isLightSpeed = true;
+            // SetAcitveLightSpeedTimeTrue?.Invoke();
             // GameSpeed를 2배로 올린다.
             GameManager.GameSpeed = _lightSpeed;
         }

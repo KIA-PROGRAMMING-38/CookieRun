@@ -18,7 +18,7 @@ public class PlayerData : MonoBehaviour
 
     public bool isHurt;
 
-    public bool isLightSpeed;
+    public static bool isLightSpeed;
 
     public float lightSpeed = 2f;
 
