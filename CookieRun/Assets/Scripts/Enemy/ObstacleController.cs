@@ -41,7 +41,7 @@ public class ObstacleController : MonoBehaviour
     {
         _playerData = col.GetComponent<PlayerData>();
 
-        if (_playerData != null && _playerData.isLightSpeed)
+        if (_playerData != null && PlayerData.isLightSpeed)
         {
             _animator.SetTrigger(EnemyAnimID.IS_EXPLOSION);
         }
@@ -50,6 +50,7 @@ public class ObstacleController : MonoBehaviour
     // 애니메이션 이벤트 호출 함수
     public void SetIdleAnimation()
     {
-        _animator.Play("Idle");
+        gameObject.SetActive(false);
+        //_animator.Play("Idle");
     }
 }
