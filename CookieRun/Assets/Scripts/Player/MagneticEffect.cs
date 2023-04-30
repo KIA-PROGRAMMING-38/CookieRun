@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Literal;
 
 public class MagneticEffect : MonoBehaviour
 {
@@ -15,6 +16,15 @@ public class MagneticEffect : MonoBehaviour
     
     private Vector3 _targetPosition;
     
+    private AudioSource _audioSource;
+    private AudioClip _magnetAudioClip;
+
+    private void Awake()
+    {
+        _audioSource = GetComponentInParent<AudioSource>();
+        _magnetAudioClip = DataManager.LoadAudioClip(AudioClipName.MAGNET);
+    }
+
     private void Start()
     {
         _playerTransform = transform.parent;
@@ -24,6 +34,9 @@ public class MagneticEffect : MonoBehaviour
     {
         // 시작 시간 설정
         _startTime = Time.time;
+        _audioSource.volume = 0.8f;
+        _audioSource.PlayOneShot(_magnetAudioClip);
+        _audioSource.volume = 0.5f;
     }
 
     private void OnTriggerStay2D(Collider2D other)

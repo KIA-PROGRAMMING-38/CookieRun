@@ -31,6 +31,6 @@ public class PlayerJumpState : StateMachineBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             animator.SetTrigger(PlayerAnimID.IS_DOUBLEJUMPING);
-        }       
+        }
     }
 }

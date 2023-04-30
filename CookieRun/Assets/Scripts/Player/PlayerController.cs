@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Literal;
 using Model;
 using UnityEngine;
 
@@ -10,6 +11,13 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private PlayerAnimController _playerAnimController;
     private Rigidbody2D _rigid;
+    
+    // Audio
+    private AudioSource _audioSource;
+    private AudioClip _dashAudioClip;
+    private AudioClip _getHpAudioClip;
+    private AudioClip _getJellyAudioClip;
+    
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
     private WaitForSeconds _escapeInvincibleTime;
@@ -28,6 +36,7 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _playerAnimController = GetComponent<PlayerAnimController>();
         _rigid = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
 
         
         // 중력 적용
@@ -37,6 +46,16 @@ public class PlayerController : MonoBehaviour
         
         GameManager.SetGameStartUIModel -= UIModelInitialize;
         GameManager.SetGameStartUIModel += UIModelInitialize;
+    }
+
+    private void Start()
+    {
+        _dashAudioClip = DataManager.LoadAudioClip(AudioClipName.DASH);
+        _getHpAudioClip = DataManager.LoadAudioClip(AudioClipName.GET_HP);
+        _getJellyAudioClip = DataManager.LoadAudioClip(AudioClipName.GET_Jelly);
+
+        JellyController.OnGetJelly -= PlaySoundOnGetJelly;
+        JellyController.OnGetJelly += PlaySoundOnGetJelly;
     }
 
     private void UIModelInitialize()
@@ -92,9 +111,11 @@ public class PlayerController : MonoBehaviour
         PlayerData.isInvincible = false;
     }
 
+    
     public IEnumerator LightSpeedInvincible()
     {
         PlayerData.isInvincible = true;
+        _audioSource.PlayOneShot(_dashAudioClip);
 
         _playerAnimController.SetAnimSpeed(_playerData.lightSpeed);
         
@@ -116,5 +137,21 @@ public class PlayerController : MonoBehaviour
     public void SetActiveCoroutine(IEnumerator enumerator)
     {
         StartCoroutine(enumerator);
+    }
+
+    public void PlaySoundOnGetHp()
+    {
+        _audioSource.PlayOneShot(_getHpAudioClip);
+    }
+
+    public void PlaySoundOnGetJelly()
+    {
+        _audioSource.PlayOneShot(_getJellyAudioClip);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.SetGameStartUIModel -= UIModelInitialize;
+        JellyController.OnGetJelly -= PlaySoundOnGetJelly;
     }
 }
