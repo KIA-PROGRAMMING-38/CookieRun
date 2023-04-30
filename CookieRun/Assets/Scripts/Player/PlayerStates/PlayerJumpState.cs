@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Literal;
-using PlayerAnimationID;
 using UnityEngine;
 
 public class PlayerJumpState : StateMachineBehaviour
@@ -19,7 +18,7 @@ public class PlayerJumpState : StateMachineBehaviour
         _playerData = animator.GetComponent<PlayerData>();
         _audioSource = animator.GetComponent<AudioSource>();
         _jumpAudioClip = DataManager.LoadAudioClip(AudioClipName.JUMP);
-        _playerData.jumping = true;
+        _playerData.IsJumping = true;
         
         // Jump
         _rigidbody.AddForce(_up * _playerData.jumpForce, ForceMode2D.Impulse);
@@ -36,6 +35,6 @@ public class PlayerJumpState : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _playerData.jumping = false;
+        _playerData.IsJumping = false;
     }
 }

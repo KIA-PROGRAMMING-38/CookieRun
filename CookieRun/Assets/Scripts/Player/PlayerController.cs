@@ -11,7 +11,9 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private PlayerAnimController _playerAnimController;
     private Rigidbody2D _rigid;
-    
+
+    private IEnumerator _normalInvincible;
+
     // Audio
     private AudioSource _audioSource;
     private AudioClip _dashAudioClip;
@@ -56,6 +58,8 @@ public class PlayerController : MonoBehaviour
 
         JellyController.OnGetJelly -= PlaySoundOnGetJelly;
         JellyController.OnGetJelly += PlaySoundOnGetJelly;
+
+        _normalInvincible = Invincible();
     }
 
     private void UIModelInitialize()
@@ -69,7 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         _deltaTime = Time.deltaTime;
         
-        if (!PlayerData.isInvincible && !GameManager.GameOver)
+        if (!PlayerData.IsInvincible && !GameManager.GameOver)
         {
             CookieUIModel.Hp -= _deltaTime;
         }
@@ -98,7 +102,7 @@ public class PlayerController : MonoBehaviour
     public IEnumerator Invincible()
     {
         // 무적상태 진입
-        PlayerData.isInvincible = true;
+        PlayerData.IsInvincible = true;
 
         _spriteRenderer.color = _invincibleColor;
 
@@ -108,13 +112,13 @@ public class PlayerController : MonoBehaviour
         // 바뀌었던 색을 원래대로 되돌린다.
         _spriteRenderer.color = _originalColor;
         
-        PlayerData.isInvincible = false;
+        PlayerData.IsInvincible = false;
     }
 
     
     public IEnumerator LightSpeedInvincible()
     {
-        PlayerData.isInvincible = true;
+        PlayerData.IsInvincible = true;
         _audioSource.PlayOneShot(_dashAudioClip);
 
         _playerAnimController.SetAnimSpeed(_playerData.lightSpeed);
@@ -129,9 +133,18 @@ public class PlayerController : MonoBehaviour
         // dashEffect 비활성화
         ActivateDashEffect(false);
         
-        PlayerData.isLightSpeed = false;
+        PlayerData.IsLightSpeed = false;
 
-        PlayerData.isInvincible = false;
+        PlayerData.IsInvincible = false;
+
+        if (_normalInvincible != null)
+        {
+            StopCoroutine(_normalInvincible);
+        }
+
+        _normalInvincible = Invincible();
+
+        StartCoroutine(_normalInvincible);
     }
 
     public void SetActiveCoroutine(IEnumerator enumerator)

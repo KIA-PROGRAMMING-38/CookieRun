@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EnemyAnimationID;
+using Literal;
 using UnityEngine.Serialization;
 
 public class ObstacleController : MonoBehaviour
@@ -41,7 +41,7 @@ public class ObstacleController : MonoBehaviour
     {
         _playerData = col.GetComponent<PlayerData>();
 
-        if (_playerData != null && PlayerData.isLightSpeed)
+        if (_playerData != null && PlayerData.IsLightSpeed)
         {
             _animator.SetTrigger(EnemyAnimID.IS_EXPLOSION);
         }

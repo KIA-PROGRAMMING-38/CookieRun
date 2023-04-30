@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using PlayerAnimationID;
-using UnityEngine;
 using Literal;
+using UnityEngine;
 
 public class PlayerHurtState : StateMachineBehaviour
 {
@@ -27,16 +26,16 @@ public class PlayerHurtState : StateMachineBehaviour
         _audioSource.PlayOneShot(_hurtAudioClip);
         
         // jump중에 Enemy랑 닿았다면 isJumping을 false해준다.
-        if (_playerData.jumping == true)
+        if (_playerData.IsJumping == true)
         {
-            _playerData.jumping = false;
+            _playerData.IsJumping = false;
             animator.SetBool(PlayerAnimID.IS_JUMPING, false);
         }
     }
     
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _playerData.isHurt = false;
+        _playerData.IsHurt = false;
         _audioSource.volume = 0.5f;
     }
 }

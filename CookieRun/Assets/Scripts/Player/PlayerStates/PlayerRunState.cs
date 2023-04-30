@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Model;
-using PlayerAnimationID;
+using Literal;
 using UnityEngine;
 
 public class PlayerRunState : StateMachineBehaviour
