@@ -36,6 +36,7 @@ public class MagneticEffect : MonoBehaviour
         _startTime = Time.time;
         _audioSource.volume = 0.8f;
         _audioSource.PlayOneShot(_magnetAudioClip);
+        _audioSource.volume = 0.5f;
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -43,7 +44,6 @@ public class MagneticEffect : MonoBehaviour
         // 경과시간이 지속시간을 넘으면
         if (Time.fixedTime >= _startTime + Duration)
         {
-            _audioSource.volume = 0.5f;
             // 컴포넌트 비활성화
             gameObject.SetActive(false);
         }

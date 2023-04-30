@@ -10,8 +10,10 @@ public class JellyController : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
     private CircleCollider2D _circleCollider;
-    
+
     private Vector2 _initialPosition;
+
+    public static event Action OnGetJelly;
     
     private void Awake()
     {
@@ -44,6 +46,7 @@ public class JellyController : MonoBehaviour
     {
         if (collision.CompareTag(PLAYER_TAG))
         {
+            OnGetJelly?.Invoke();
             GameManager.UpdateScore(_jellyData.Score);
             gameObject.SetActive(false);
         }

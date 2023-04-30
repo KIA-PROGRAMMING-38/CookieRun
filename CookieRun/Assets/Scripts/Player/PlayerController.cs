@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource _audioSource;
     private AudioClip _dashAudioClip;
     private AudioClip _getHpAudioClip;
+    private AudioClip _getJellyAudioClip;
     
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
@@ -51,6 +52,10 @@ public class PlayerController : MonoBehaviour
     {
         _dashAudioClip = DataManager.LoadAudioClip(AudioClipName.DASH);
         _getHpAudioClip = DataManager.LoadAudioClip(AudioClipName.GET_HP);
+        _getJellyAudioClip = DataManager.LoadAudioClip(AudioClipName.GET_Jelly);
+
+        JellyController.OnGetJelly -= PlaySoundOnGetJelly;
+        JellyController.OnGetJelly += PlaySoundOnGetJelly;
     }
 
     private void UIModelInitialize()
@@ -139,8 +144,14 @@ public class PlayerController : MonoBehaviour
         _audioSource.PlayOneShot(_getHpAudioClip);
     }
 
+    public void PlaySoundOnGetJelly()
+    {
+        _audioSource.PlayOneShot(_getJellyAudioClip);
+    }
+
     private void OnDestroy()
     {
         GameManager.SetGameStartUIModel -= UIModelInitialize;
+        JellyController.OnGetJelly -= PlaySoundOnGetJelly;
     }
 }
