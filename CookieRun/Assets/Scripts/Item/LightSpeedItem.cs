@@ -6,8 +6,7 @@ using UnityEngine.Serialization;
 
 public class LightSpeedItem : MonoBehaviour
 {
-    public static event Action SetAcitveLightSpeedTimeTrue;
-    
+
     [SerializeField] private float _lightSpeed = 2f;
     private PlayerController _playerController;
     private PlayerData _playerData;

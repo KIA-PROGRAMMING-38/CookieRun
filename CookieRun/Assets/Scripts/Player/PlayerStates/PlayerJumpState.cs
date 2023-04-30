@@ -33,4 +33,9 @@ public class PlayerJumpState : StateMachineBehaviour
             animator.SetTrigger(PlayerAnimID.IS_DOUBLEJUMPING);
         }
     }
+
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        _playerData.jumping = false;
+    }
 }
