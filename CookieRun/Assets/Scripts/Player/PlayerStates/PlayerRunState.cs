@@ -28,10 +28,5 @@ public class PlayerRunState : StateMachineBehaviour
         {
             animator.SetBool(PlayerAnimID.IS_SLIDE, true);
         }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            CookieUIModel.Hp = 0;
-        }
     }
 }
