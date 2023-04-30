@@ -6,5 +6,6 @@ namespace Literal
         public static readonly string HURT = "Hurt";
         public static readonly string DIE = "Die";
         public static readonly string SLIDE = "Slide";
+        public static readonly string DASH = "Dash";
     }
 }

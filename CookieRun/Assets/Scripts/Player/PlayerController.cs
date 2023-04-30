@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Literal;
 using Model;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private PlayerAnimController _playerAnimController;
     private Rigidbody2D _rigid;
+    private AudioSource _audioSource;
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
     private WaitForSeconds _escapeInvincibleTime;
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _playerAnimController = GetComponent<PlayerAnimController>();
         _rigid = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
 
         
         // 중력 적용
@@ -37,6 +40,11 @@ public class PlayerController : MonoBehaviour
         
         GameManager.SetGameStartUIModel -= UIModelInitialize;
         GameManager.SetGameStartUIModel += UIModelInitialize;
+    }
+
+    private void Start()
+    {
+        _dashAudioClip = DataManager.LoadAudioClip(AudioClipName.DASH);
     }
 
     private void UIModelInitialize()
@@ -92,9 +100,11 @@ public class PlayerController : MonoBehaviour
         PlayerData.isInvincible = false;
     }
 
+    private AudioClip _dashAudioClip;
     public IEnumerator LightSpeedInvincible()
     {
         PlayerData.isInvincible = true;
+        _audioSource.PlayOneShot(_dashAudioClip);
 
         _playerAnimController.SetAnimSpeed(_playerData.lightSpeed);
         
