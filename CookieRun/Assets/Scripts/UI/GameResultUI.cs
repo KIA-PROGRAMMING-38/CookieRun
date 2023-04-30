@@ -19,9 +19,7 @@ public class GameResultUI : MonoBehaviour
         GameManager.OnGameEnd += Activate;
         
         _waitForSeconds = new WaitForSeconds(_waitSeconds);
-        
-        Debug.Log("hiiiiiii");
-        
+
         gameObject.SetActive(false);
     }
 

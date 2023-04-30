@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PlayerAnimationID
+namespace Literal
 {
     public static class PlayerAnimID
     {

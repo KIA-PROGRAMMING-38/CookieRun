@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using PlayerAnimationID;
+using Literal;
 using Model;
 
 public class PlayerAnimController : MonoBehaviour
@@ -50,12 +47,12 @@ public class PlayerAnimController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         // 무적상태이면 Hurt로 들어가면 안된다.
-        if (col.CompareTag("Enemy") && !PlayerData.isInvincible)
+        if (col.CompareTag("Enemy") && !PlayerData.IsInvincible)
         {
             if (!GameManager.GameOver)
             {
                 _animator.SetTrigger(PlayerAnimID.IS_HURT);
-                _playerData.isHurt = true;
+                _playerData.IsHurt = true;
 
 
                 if (_normalInvicible != null)
@@ -83,7 +80,7 @@ public class PlayerAnimController : MonoBehaviour
 
     void PerformJump()
     {
-        if (_playerData.jumping)
+        if (_playerData.IsJumping)
         {
             _animator.SetTrigger(PlayerAnimID.IS_DOUBLEJUMPING);
         }

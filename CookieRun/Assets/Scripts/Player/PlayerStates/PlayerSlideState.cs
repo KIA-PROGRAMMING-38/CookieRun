@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using PlayerAnimationID;
 using UnityEngine;
 using Literal;
 
@@ -31,10 +28,5 @@ public class PlayerSlideState : StateMachineBehaviour
         {
             animator.SetBool(PlayerAnimID.IS_SLIDE, false);
         }
-    }
-    
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        
     }
 }

@@ -68,7 +68,7 @@ public class SpawnManager : MonoBehaviour
     
     public WaitForSeconds SectionSpawnInterval()
     {
-        if ( PlayerData.isLightSpeed )
+        if ( PlayerData.IsLightSpeed )
         {
             // 광속질주인 상태
             return _lightSpeedSpawnInterval;

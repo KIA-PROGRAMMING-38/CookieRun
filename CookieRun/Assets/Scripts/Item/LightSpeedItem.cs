@@ -9,13 +9,11 @@ public class LightSpeedItem : MonoBehaviour
 
     [SerializeField] private float _lightSpeed = 2f;
     private PlayerController _playerController;
-    private PlayerData _playerData;
     private IEnumerator _lightSpeedCoroutine;
 
     // Player랑만 충돌검사를 하게 레이어 구성을 했다.
     private void OnTriggerEnter2D(Collider2D col)
     {
-        _playerData = col.GetComponent<PlayerData>();
         _playerController = col.GetComponent<PlayerController>();
         _lightSpeedCoroutine = _playerController.LightSpeedInvincible();
 
@@ -23,7 +21,7 @@ public class LightSpeedItem : MonoBehaviour
         {
             _playerController.SetActiveCoroutine(_lightSpeedCoroutine);
             _playerController.ActivateDashEffect(true);
-            PlayerData.isLightSpeed = true;
+            PlayerData.IsLightSpeed = true;
             // SetAcitveLightSpeedTimeTrue?.Invoke();
             // GameSpeed를 2배로 올린다.
             GameManager.GameSpeed = _lightSpeed;
