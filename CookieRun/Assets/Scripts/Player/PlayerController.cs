@@ -7,8 +7,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public static event Action SetActiveLightSpeedFalse; 
-    
     private PlayerData _playerData;
     private SpriteRenderer _spriteRenderer;
     private PlayerAnimController _playerAnimController;

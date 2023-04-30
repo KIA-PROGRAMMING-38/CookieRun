@@ -20,6 +20,12 @@ public class PlayerAnimController : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
     }
 
+    private void Start()
+    {
+        JumpButton.OnClickJumpButton -= PerformJump;
+        JumpButton.OnClickJumpButton += PerformJump;
+    }
+
     private void Update()
     {
         // 어느 상태던지 hp가 0이면 Die상태가 된다.
@@ -69,5 +75,23 @@ public class PlayerAnimController : MonoBehaviour
     public void SetAnimSpeed(float speed)
     {
         _animator.speed = speed;
+    }
+
+    void PerformJump()
+    {
+        if (_playerData.jumping)
+        {
+            _animator.SetTrigger(PlayerAnimID.IS_DOUBLEJUMPING);
+        }
+
+        else
+        {
+            _animator.SetBool(PlayerAnimID.IS_JUMPING, true);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        JumpButton.OnClickJumpButton -= PerformJump;
     }
 }
