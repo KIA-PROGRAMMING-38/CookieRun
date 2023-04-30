@@ -9,5 +9,6 @@ namespace Literal
         public static readonly string DASH = "Dash";
         public static readonly string EXPLOSION = "Explosion";
         public static readonly string MAGNET = "Magnet";
+        public static readonly string GET_HP = "GetHp";
     }
 }

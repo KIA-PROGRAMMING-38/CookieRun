@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     
     // Audio
     private AudioSource _audioSource;
-    private AudioClip _magnetAudioClip;
+    private AudioClip _dashAudioClip;
+    private AudioClip _getHpAudioClip;
     
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _dashAudioClip = DataManager.LoadAudioClip(AudioClipName.DASH);
+        _getHpAudioClip = DataManager.LoadAudioClip(AudioClipName.GET_HP);
     }
 
     private void UIModelInitialize()
@@ -104,7 +106,7 @@ public class PlayerController : MonoBehaviour
         PlayerData.isInvincible = false;
     }
 
-    private AudioClip _dashAudioClip;
+    
     public IEnumerator LightSpeedInvincible()
     {
         PlayerData.isInvincible = true;
@@ -130,6 +132,11 @@ public class PlayerController : MonoBehaviour
     public void SetActiveCoroutine(IEnumerator enumerator)
     {
         StartCoroutine(enumerator);
+    }
+
+    public void PlaySoundOnGetHp()
+    {
+        _audioSource.PlayOneShot(_getHpAudioClip);
     }
 
     private void OnDestroy()

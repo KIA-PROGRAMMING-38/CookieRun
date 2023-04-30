@@ -17,6 +17,7 @@ public class EnergyPotion : MonoBehaviour
             
             // hp 회복
             _playerController.ChangesHpByAmount(hpRecoveryValue);
+            _playerController.PlaySoundOnGetHp();
 
             gameObject.SetActive(false);
         }
