@@ -11,7 +11,11 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private PlayerAnimController _playerAnimController;
     private Rigidbody2D _rigid;
+    
+    // Audio
     private AudioSource _audioSource;
+    private AudioClip _magnetAudioClip;
+    
     private Color _invincibleColor = new Color(1, 1, 1, 0.5f);
     private Color _originalColor = new Color(1,1,1,1);
     private WaitForSeconds _escapeInvincibleTime;
@@ -126,5 +130,10 @@ public class PlayerController : MonoBehaviour
     public void SetActiveCoroutine(IEnumerator enumerator)
     {
         StartCoroutine(enumerator);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.SetGameStartUIModel -= UIModelInitialize;
     }
 }
