@@ -11,7 +11,9 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private PlayerAnimController _playerAnimController;
     private Rigidbody2D _rigid;
-    
+
+    private IEnumerator _normalInvincible;
+
     // Audio
     private AudioSource _audioSource;
     private AudioClip _dashAudioClip;
@@ -56,6 +58,8 @@ public class PlayerController : MonoBehaviour
 
         JellyController.OnGetJelly -= PlaySoundOnGetJelly;
         JellyController.OnGetJelly += PlaySoundOnGetJelly;
+
+        _normalInvincible = Invincible();
     }
 
     private void UIModelInitialize()
@@ -132,6 +136,15 @@ public class PlayerController : MonoBehaviour
         PlayerData.isLightSpeed = false;
 
         PlayerData.isInvincible = false;
+
+        if (_normalInvincible != null)
+        {
+            StopCoroutine(_normalInvincible);
+        }
+
+        _normalInvincible = Invincible();
+
+        StartCoroutine(_normalInvincible);
     }
 
     public void SetActiveCoroutine(IEnumerator enumerator)
