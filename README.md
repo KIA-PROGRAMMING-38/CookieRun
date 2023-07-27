@@ -1,7 +1,8 @@
 # CookieRun
 
 러닝 액션게임으로, 쿠키가 젤리를 획득하여 고득점을 당성하는 게임입니다.
-<img src="https://github.com/KIA-PROGRAMMING-38/CookieRun/assets/120005259/bfbc71e8-2849-49e4-a268-af0180362d2f"  width="200" height="400"/>
+
+<img src="https://github.com/KIA-PROGRAMMING-38/CookieRun/assets/120005259/bfbc71e8-2849-49e4-a268-af0180362d2f"  width="315" height="400"/>
 
 # 타겟 플랫폼
 Standalone
